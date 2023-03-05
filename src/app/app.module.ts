@@ -14,6 +14,7 @@ import { AppComponent } from './app.component';
 // NOTE: there are two "bootstraps" we're talking about here:
 // - the module bootstrap in main.ts - defining the root module
 // - the component bootstrap in @NgModule - defining which component will be the root component
+
 @NgModule({ // annotation marking the class (AppModule) as module
   declarations: [ // any components, directives and pipes must be registered here
     AppComponent
