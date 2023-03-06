@@ -42,15 +42,17 @@
             <th>Room price</th>
             <th>Amenities</th>
             <th>Checkin time</th>
+            <!-- <td>Raw</td> -->
         </tr>
         <tr [ngClass]="e ? 'even' : 'odd'" *ngFor="let room of roomList; let e=even; let o=odd; let i=index">
-            <td>{{ i }}</td>
+            <td>{{ i | percent }}</td>
             <td>{{ e ? "Even" : "Odd" }}</td>
-            <td>{{ room.number }}</td>
-            <td>{{ room.type }}</td>
-            <td>{{ room.price }}</td>
-            <td>{{ room.amenities }}</td>
-            <td>{{ room.checkinTime }}</td>
+            <td>{{ room.number | number:'4.1-5' }}</td>
+            <td>{{ room.type | uppercase}}</td>
+            <td>{{ room.price | currency: 'CZK' }}</td>
+            <td>{{ room.amenities | json }}</td>
+            <td>{{ room.checkinTime | date: 'MMM d, y, h:mm:ss a' }}</td> <!-- DatePipe example -->
+            <!-- <td>{{ room | json }}</td> -->
         </tr>
     </table>
 
