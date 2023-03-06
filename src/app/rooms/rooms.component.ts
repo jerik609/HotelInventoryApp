@@ -26,9 +26,9 @@ export class RoomsComponent implements OnInit {
   }
 
   // just some data we can play with when learning directives (*ngIf)
-  rooms: Rooms = {
+  rooms?: Rooms = {
     totalRooms: 20,
-    availableRooms: 10,
+    availableRooms: 4,
     bookedRooms: 5
   }
 

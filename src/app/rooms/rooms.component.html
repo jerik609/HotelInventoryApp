@@ -23,7 +23,10 @@
 <hr>
 
 <!-- <div *ngIf="rooms && rooms.availableRooms && rooms.availableRooms > 0"> <!-- example of *ngIf --> <!-- let's do some inspection -->
-<div *ngIf="rooms?.availableRooms ?? 0 > 0"> <!-- example of *ngIf --> <!-- let's do some inspection -->        
+
+<!-- example of [ngStyle] and *ngIf -->
+<div [ngStyle]="{ 'font-weight': 'bold', 'color' : (rooms?.availableRooms ?? 0) > 5 ? 'green' : 'red' }" *ngIf="(rooms?.availableRooms ?? 0) > 0"> 
+    
     Rooms List:
 
     <!-- {{ roomList }} -->  <!-- this prints just [object Object],[object Object],[object Object], which is not very useful, enter *ngFor -->
@@ -40,7 +43,7 @@
             <th>Amenities</th>
             <th>Checkin time</th>
         </tr>
-        <tr *ngFor="let room of roomList; let e=even; let o=odd; let i=index">
+        <tr [ngClass]="e ? 'even' : 'odd'" *ngFor="let room of roomList; let e=even; let o=odd; let i=index">
             <td>{{ i }}</td>
             <td>{{ e ? "Even" : "Odd" }}</td>
             <td>{{ room.number }}</td>
