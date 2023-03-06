@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RoomsComponent } from './rooms/rooms.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // https://angular.io/guide/ngmodules
 // I can have any number of modules in my application, but there always has to be only one root module
@@ -22,7 +23,7 @@ import { RoomsComponent } from './rooms/rooms.component';
   ],
   imports: [ // any module we intend to use, must be placed here (both external and those created by us)
     BrowserModule, // angular platform provided module, part of the browser library
-    AppRoutingModule // approuting module is created by us
+    AppRoutingModule, BrowserAnimationsModule // approuting module is created by us
   ],
   providers: [],
   bootstrap: [AppComponent] // this defines, which component will be loaded first (the root component)
