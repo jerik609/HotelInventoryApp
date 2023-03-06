@@ -1,1 +1,13 @@
 <h1>Hello, World!</h1>
+<!-- example of ngSwitch - let's imagine we want to display room information to admin, but not the user -->
+<div [ngSwitch]="role">
+    <div *ngSwitchCase="'User'">
+        Welcome User!
+    </div>
+    <div *ngSwitchCase="'Admin'"> <!-- must use "'string'" so that it's really taken as string and not as a variable -->
+        <app-rooms></app-rooms>
+    </div>
+    <div *ngSwitchDefault>
+        Undefined role, no way I'm displaying anything!
+    </div>
+</div>

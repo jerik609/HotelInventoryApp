@@ -14,6 +14,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'HotelInventoryApp';
+  role = 'Admin';
 }
 
 // in future, when I need to add more components, this is where they will be placed (and the respective app.component.html)

@@ -1,0 +1,55 @@
+<!-- this is an angular template -->
+<p>rooms works!</p>
+<h1>Welcome to {{hotelName}}!</h1> <!-- interpolation of an attribute -->
+<p>Displaying a class attribute via interpolation: {{ boo.hoo }}</p> <!-- interpolation of a class member -->
+
+<div [hidden]="hideRooms">
+    Number of rooms: 
+    <div [innerText]="numberOfRooms"></div> <!-- (HTML) property binding (this is called box syntax) -->
+</div>
+<button (click)="toggle()">Toggle!</button> <!-- event binding (this is called "banana syntax") -->
+
+<!-- using "element hiding" is not optimal: 
+    1. the data is still available on the DOM, only hidden, 
+    2. if we have too many elements on the DOM, we'll have performance problems (even if hidden) -->
+
+<!-- solution - I will not display it, unless is needed -->
+<hr>
+
+<!-- optional chaining & nullish coalescing - we can use both in templates -->
+<!-- optional chaining = evaluation will stop immediately when the expression evaluates to null/undefined - and it will return undefined -->
+{{ nullRooms?.availableRooms ?? 'No rooms available' }}
+
+<hr>
+
+<!-- <div *ngIf="rooms && rooms.availableRooms && rooms.availableRooms > 0"> <!-- example of *ngIf --> <!-- let's do some inspection -->
+<div *ngIf="rooms?.availableRooms ?? 0 > 0"> <!-- example of *ngIf --> <!-- let's do some inspection -->        
+    Rooms List:
+
+    <!-- {{ roomList }} -->  <!-- this prints just [object Object],[object Object],[object Object], which is not very useful, enter *ngFor -->
+
+    <!-- let's use table for now, otherwise we typically use an UI library (Angular Material) -->
+    <!-- angular material can handle this more nicely, but we need to practice ngfor -->
+    <table>
+        <tr>
+            <th>Index</th>
+            <th>Even/Odd</th>
+            <th>Room Number</th>
+            <th>Room Type</th>
+            <th>Room price</th>
+            <th>Amenities</th>
+            <th>Checkin time</th>
+        </tr>
+        <tr *ngFor="let room of roomList; let e=even; let o=odd; let i=index">
+            <td>{{ i }}</td>
+            <td>{{ e ? "Even" : "Odd" }}</td>
+            <td>{{ room.number }}</td>
+            <td>{{ room.type }}</td>
+            <td>{{ room.price }}</td>
+            <td>{{ room.amenities }}</td>
+            <td>{{ room.checkinTime }}</td>
+        </tr>
+    </table>
+
+</div>
+
