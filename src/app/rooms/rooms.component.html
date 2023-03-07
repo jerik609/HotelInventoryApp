@@ -24,37 +24,11 @@
 
 <!-- <div *ngIf="rooms && rooms.availableRooms && rooms.availableRooms > 0"> <!-- example of *ngIf --> <!-- let's do some inspection -->
 
-<!-- example of [ngStyle] and *ngIf -->
-<div [ngStyle]="{ 'font-weight': 'bold', 'color' : (rooms?.availableRooms ?? 0) > 5 ? 'green' : 'red' }" *ngIf="(rooms?.availableRooms ?? 0) > 0"> 
-    
-    Rooms List:
-
-    <!-- {{ roomList }} -->  <!-- this prints just [object Object],[object Object],[object Object], which is not very useful, enter *ngFor -->
-
-    <!-- let's use table for now, otherwise we typically use an UI library (Angular Material) -->
-    <!-- angular material can handle this more nicely, but we need to practice ngfor -->
-    <table>
-        <tr>
-            <th>Index</th>
-            <th>Even/Odd</th>
-            <th>Room Number</th>
-            <th>Room Type</th>
-            <th>Room price</th>
-            <th>Amenities</th>
-            <th>Checkin time</th>
-            <!-- <td>Raw</td> -->
-        </tr>
-        <tr [ngClass]="e ? 'even' : 'odd'" *ngFor="let room of roomList; let e=even; let o=odd; let i=index">
-            <td>{{ i | percent }}</td>
-            <td>{{ e ? "Even" : "Odd" }}</td>
-            <td>{{ room.number | number:'4.1-5' }}</td>
-            <td>{{ room.type | uppercase}}</td>
-            <td>{{ room.price | currency: 'CZK' }}</td>
-            <td>{{ room.amenities | json }}</td>
-            <td>{{ room.checkinTime | date: 'MMM d, y, h:mm:ss a' }}</td> <!-- DatePipe example -->
-            <!-- <td>{{ room | json }}</td> -->
-        </tr>
-    </table>
-
+<div *ngIf="selectedRoom != undefined">
+    {{ selectedRoom | json }}
 </div>
 
+<!-- example of [ngStyle] and *ngIf -->
+<div [ngStyle]="{ 'font-weight': 'bold', 'color' : (rooms?.availableRooms ?? 0) > 5 ? 'green' : 'red' }" *ngIf="(rooms?.availableRooms ?? 0) > 0"> 
+    <app-rooms-list [rooms]="roomList" (clickedRoom)="selectRoom($event)"></app-rooms-list>
+</div>

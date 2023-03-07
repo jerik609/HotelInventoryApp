@@ -6,63 +6,73 @@ import { Room, Rooms } from './rooms';
   templateUrl: './rooms.component.html',
   styleUrls: ['./rooms.component.scss']
 })
-export class RoomsComponent implements OnInit {
+export class RoomsComponent implements OnInit { // hey, there's ngOnInit here :-)
+
+  boo: Boo;
 
   hotelName: string = 'Best Hotel';
   numberOfRooms: number;
-  boo: Boo;
+  hideRooms: boolean = false;
+  rooms?: Rooms;
+  nullRooms?: Rooms;
+  
+  roomList: Room[] = [];
+
+  selectedRoom?: Room;
 
   constructor() {
-    this.boo = new Boo("oh", "no");
+    this.boo = new Boo("oh no", "anyway");
     this.numberOfRooms = 100;
   }
 
   ngOnInit(): void {
+
+    // just some data we can play with when learning directives (*ngIf)
+    this.rooms = { 
+      totalRooms: 20,
+      availableRooms: 4,
+      bookedRooms: 5
+    }
+
+    // data for *ngFor, we have data, let's bind it
+    this.roomList = [{
+      number: 1,
+      type: 'Deluxe Room',
+      amenities: ['Air Conditioning', 'Free WiFi'],
+      photos: ['photos/1.jpg', 'photos/2.jpg', 'photos/3.jpg'],
+      price: 100,
+      checkinTime: new Date('11-November-2021'),
+      checkoutTime: new Date('11-November-2021')
+    },
+    {
+      number: 2,
+      type: 'Standard Room',
+      amenities: ['Air Conditioning', 'Free WiFi'],
+      photos: ['photos/1.jpg', 'photos/2.jpg', 'photos/3'],
+      price: 50,
+      checkinTime: new Date('11-November-2021'),
+      checkoutTime: new Date('11-November-2021')
+    },
+    {
+      number: 3,
+      type: 'Lowcost Room',
+      amenities: ['Air Conditioning', 'Free WiFi'],
+      photos: ['photos/1.jpg', 'photos/2.jpg', 'photos/3'],
+      price: 20,
+      checkinTime: new Date('11-November-2021'),
+      checkoutTime: new Date('11-November-2021')
+    }];
+
   }
 
-  hideRooms: boolean = false;
+  // a toggle function :-)
   toggle() {
     this.hideRooms = !this.hideRooms;
   }
 
-  // just some data we can play with when learning directives (*ngIf)
-  rooms?: Rooms = {
-    totalRooms: 20,
-    availableRooms: 4,
-    bookedRooms: 5
+  selectRoom(room: Room): void {
+    this.selectedRoom = room;
   }
-
-  nullRooms?: Rooms = {
-  }
-
-  // data for *ngFor, we have data, let's bind it
-  roomList: Room[] = [{
-    number: 1,
-    type: 'Deluxe Room',
-    amenities: ['Air Conditioning', 'Free WiFi'],
-    photos: ['photos/1.jpg', 'photos/2.jpg', 'photos/3.jpg'],
-    price: 100,
-    checkinTime: new Date('11-November-2021'),
-    checkoutTime: new Date('11-November-2021')
-  },
-  {
-    number: 2,
-    type: 'Standard Room',
-    amenities: ['Air Conditioning', 'Free WiFi'],
-    photos: ['photos/1.jpg', 'photos/2.jpg', 'photos/3'],
-    price: 50,
-    checkinTime: new Date('11-November-2021'),
-    checkoutTime: new Date('11-November-2021')
-  },
-  {
-    number: 3,
-    type: 'Lowcost Room',
-    amenities: ['Air Conditioning', 'Free WiFi'],
-    photos: ['photos/1.jpg', 'photos/2.jpg', 'photos/3'],
-    price: 20,
-    checkinTime: new Date('11-November-2021'),
-    checkoutTime: new Date('11-November-2021')
-  }];
 
 }
 
