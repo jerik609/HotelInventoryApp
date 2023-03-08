@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, DoCheck, OnInit, ViewChild } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, Component, DoCheck, OnInit, ViewChild } from '@angular/core';
 import { HeaderComponent } from './header/header.component';
 import { Room, Rooms } from './rooms';
 
@@ -7,7 +7,7 @@ import { Room, Rooms } from './rooms';
   templateUrl: './rooms.component.html',
   styleUrls: ['./rooms.component.scss']
 })
-export class RoomsComponent implements OnInit, DoCheck, AfterViewInit { // hey, there's ngOnInit here :-)
+export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterViewChecked { // hey, there's ngOnInit here :-)
 
   boo: Boo;
 
@@ -29,6 +29,11 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit { // hey, 
 
   ngAfterViewInit(): void {
     this.headerComponent!.title = "Rooms View";
+  }
+
+  ngAfterViewChecked(): void {
+    // triggered after one check ahs been performed - not used that much (only once)
+    this.headerComponent!.title = "one time trigger actions";
   }
 
   constructor() {
