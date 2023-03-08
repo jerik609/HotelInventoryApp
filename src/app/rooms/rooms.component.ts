@@ -1,4 +1,5 @@
-import { Component, DoCheck, OnInit } from '@angular/core';
+import { AfterViewInit, Component, DoCheck, OnInit, ViewChild } from '@angular/core';
+import { HeaderComponent } from './header/header.component';
 import { Room, Rooms } from './rooms';
 
 @Component({
@@ -6,7 +7,7 @@ import { Room, Rooms } from './rooms';
   templateUrl: './rooms.component.html',
   styleUrls: ['./rooms.component.scss']
 })
-export class RoomsComponent implements OnInit, DoCheck { // hey, there's ngOnInit here :-)
+export class RoomsComponent implements OnInit, DoCheck, AfterViewInit { // hey, there's ngOnInit here :-)
 
   boo: Boo;
 
@@ -22,6 +23,14 @@ export class RoomsComponent implements OnInit, DoCheck { // hey, there's ngOnIni
 
   selectedRoom?: Room;
 
+  // viewchild example
+
+  @ViewChild(HeaderComponent, { static: false }) headerComponent?: HeaderComponent;
+
+  ngAfterViewInit(): void {
+    this.headerComponent!.title = "Rooms View";
+  }
+
   constructor() {
     this.boo = new Boo("oh no", "anyway");
     this.numberOfRooms = 100;
@@ -32,6 +41,8 @@ export class RoomsComponent implements OnInit, DoCheck { // hey, there's ngOnIni
   }
 
   ngOnInit(): void {
+
+    //console.log("Header component, where are thou? " + this.headerComponent);
 
     // just some data we can play with when learning directives (*ngIf)
     this.rooms = { 

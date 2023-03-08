@@ -1,6 +1,10 @@
 <!-- this is an angular template -->
-<p>rooms works!</p>
-<h1>Welcome to {{hotelName}}!</h1> <!-- interpolation of an attribute -->
+
+<!-- interpolation of an attribute -->
+<h1>Welcome to {{hotelName}}!</h1>
+
+<app-header></app-header>
+
 <p>Displaying a class attribute via interpolation: {{ boo.hoo }}</p> <!-- interpolation of a class member -->
 
 <div [hidden]="hideRooms">
@@ -18,7 +22,7 @@
 
 <!-- optional chaining & nullish coalescing - we can use both in templates -->
 <!-- optional chaining = evaluation will stop immediately when the expression evaluates to null/undefined - and it will return undefined -->
-{{ nullRooms?.availableRooms ?? 'No rooms available' }}
+<!-- {{ nullRooms?.availableRooms ?? 'No rooms available' }} -->
 
 <hr>
 
