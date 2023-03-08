@@ -74,6 +74,19 @@ export class RoomsComponent implements OnInit { // hey, there's ngOnInit here :-
     this.selectedRoom = room;
   }
 
+  addRoom() {
+    const newRoom: Room = {
+      number: this.roomList.length + 1,
+      type: 'Standard Room',
+      amenities: ['Chocolate Fountain', 'Free Beer'],
+      photos: ['photos/1.jpg', 'photos/2.jpg', 'photos/3'],
+      price: 1500,
+      checkinTime: new Date('11-November-2021'),
+      checkoutTime: new Date('11-November-2021')
+    };
+    this.roomList.push(newRoom);
+  };
+
 }
 
 class Boo {

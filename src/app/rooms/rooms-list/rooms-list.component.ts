@@ -1,10 +1,11 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { Room } from '../rooms';
 
 @Component({
   selector: 'app-rooms-list',
   templateUrl: './rooms-list.component.html',
-  styleUrls: ['./rooms-list.component.scss']
+  styleUrls: ['./rooms-list.component.scss'],
+  //changeDetection: ChangeDetectionStrategy.OnPush // this is the default change detection strategy (all changes are detected)
 })
 export class RoomsListComponent {
 
