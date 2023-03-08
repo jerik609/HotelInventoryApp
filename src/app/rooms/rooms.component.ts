@@ -84,7 +84,11 @@ export class RoomsComponent implements OnInit { // hey, there's ngOnInit here :-
       checkinTime: new Date('11-November-2021'),
       checkoutTime: new Date('11-November-2021')
     };
-    this.roomList.push(newRoom);
+    
+    this.roomList = [...this.roomList, newRoom];
+    // "push" will not work in OnPush mode, because OnPush does not register changes if reference does not change 
+    // in contrast to the Default mode, which checks the data, but it's less efficient due to that
+    //this.roomList.push(newRoom); 
   };
 
 }

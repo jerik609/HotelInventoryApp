@@ -5,7 +5,7 @@ import { Room } from '../rooms';
   selector: 'app-rooms-list',
   templateUrl: './rooms-list.component.html',
   styleUrls: ['./rooms-list.component.scss'],
-  //changeDetection: ChangeDetectionStrategy.OnPush // this is the default change detection strategy (all changes are detected)
+  changeDetection: ChangeDetectionStrategy.OnPush // this is the default change detection strategy (all changes are detected)
 })
 export class RoomsListComponent {
 
