@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DoCheck, OnInit } from '@angular/core';
 import { Room, Rooms } from './rooms';
 
 @Component({
@@ -6,7 +6,7 @@ import { Room, Rooms } from './rooms';
   templateUrl: './rooms.component.html',
   styleUrls: ['./rooms.component.scss']
 })
-export class RoomsComponent implements OnInit { // hey, there's ngOnInit here :-)
+export class RoomsComponent implements OnInit, DoCheck { // hey, there's ngOnInit here :-)
 
   boo: Boo;
 
@@ -25,6 +25,10 @@ export class RoomsComponent implements OnInit { // hey, there's ngOnInit here :-
   constructor() {
     this.boo = new Boo("oh no", "anyway");
     this.numberOfRooms = 100;
+  }
+  
+  ngDoCheck(): void {
+    console.log("do check is called");
   }
 
   ngOnInit(): void {
