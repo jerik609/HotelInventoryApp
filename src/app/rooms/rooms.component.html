@@ -34,5 +34,5 @@
 
 <!-- example of [ngStyle] and *ngIf -->
 <div [ngStyle]="{ 'font-weight': 'bold', 'color' : (rooms?.availableRooms ?? 0) > 5 ? 'green' : 'red' }" *ngIf="(rooms?.availableRooms ?? 0) > 0"> 
-    <app-rooms-list [rooms]="roomList" (clickedRoom)="selectRoom($event)"></app-rooms-list>
+    <app-rooms-list [rooms]="roomList" [title]="title" (clickedRoom)="selectRoom($event)"></app-rooms-list>
 </div>

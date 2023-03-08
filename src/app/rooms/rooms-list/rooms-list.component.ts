@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, OnChanges, SimpleChanges } from '@angular/core';
 import { Room } from '../rooms';
 
 @Component({
@@ -7,9 +7,20 @@ import { Room } from '../rooms';
   styleUrls: ['./rooms-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush // this is the default change detection strategy (all changes are detected)
 })
-export class RoomsListComponent {
+export class RoomsListComponent implements OnChanges {
 
   constructor() { }
+
+  @Input() title: string = 'initial title';
+
+  ngOnChanges(changes: SimpleChanges): void {
+    
+    console.log(changes);
+    console.log("current value of title: " + this.title);
+    if (changes["title"]) {
+      this.title = changes["title"].currentValue.toUpperCase() + " some cookies";
+    }
+  }
 
   // this is where we will receive our rooms data
   // here we will get the data
@@ -28,5 +39,9 @@ export class RoomsListComponent {
   selectRoom(room: Room) {
     this.clickedRoom.emit(room);
   }
+
+
+
+
 
 }
