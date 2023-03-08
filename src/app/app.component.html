@@ -6,9 +6,16 @@
         Welcome User!
     </div>
     <div *ngSwitchCase="'Admin'"> <!-- must use "'string'" so that it's really taken as string and not as a variable -->
-        <app-rooms></app-rooms>
+                
+        <!-- <app-rooms></app-rooms> -->
+        <div>
+            <ng-template #myProperty> </ng-template>
+        </div>
+
     </div>
     <div *ngSwitchDefault>
         Undefined role, no way I'm displaying anything!
     </div>
 </div>
+
+<div #specialProperty></div>
