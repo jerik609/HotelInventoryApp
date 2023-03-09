@@ -9,6 +9,6 @@ export class HeaderComponent {
 
   // there's no input property, but we'd like to set it
 
-  title: string = "";
+  title: string = "a very very initial value";
 
 }

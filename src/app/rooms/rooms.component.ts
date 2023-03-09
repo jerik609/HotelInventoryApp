@@ -1,4 +1,4 @@
-import { AfterViewChecked, AfterViewInit, Component, DoCheck, OnInit, ViewChild } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, Component, DoCheck, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { HeaderComponent } from './header/header.component';
 import { Room, Rooms } from './rooms';
 
@@ -27,6 +27,9 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
 
   @ViewChild(HeaderComponent, { static: false }) headerComponent?: HeaderComponent;
 
+  // for view children, static is false and cannot be set to true
+  @ViewChildren(HeaderComponent) headerChildrenComponent?: QueryList<HeaderComponent>;
+
   ngAfterViewInit(): void {
     this.headerComponent!.title = "Rooms View";
   }
@@ -34,6 +37,14 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
   ngAfterViewChecked(): void {
     // triggered after one check ahs been performed - not used that much (only once)
     this.headerComponent!.title = "one time trigger actions";
+
+    console.log(this.headerChildrenComponent);
+
+    this.headerChildrenComponent?.forEach(element => 
+      element.title = "modified title value using @ViewChildren");
+
+    
+
   }
 
   constructor() {
