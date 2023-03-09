@@ -1,21 +1,26 @@
 <h1>---=== Angular Application Demo ===---</h1>
+
 <br>
+<div>======================================================</div>
 <!-- example of ngSwitch - let's imagine we want to display room information to admin, but not the user -->
 <div [ngSwitch]="role">
     <div *ngSwitchCase="'User'">
         Welcome User!
     </div>
     <div *ngSwitchCase="'Admin'"> <!-- must use "'string'" so that it's really taken as string and not as a variable -->
-                
         <!-- <app-rooms></app-rooms> -->
-        <div>
-            <ng-template #myProperty> </ng-template>
-        </div>
-
+        <ng-template #myProperty> </ng-template>
     </div>
     <div *ngSwitchDefault>
         Undefined role, no way I'm displaying anything!
     </div>
 </div>
+<div>======================================================</div>
+<br>
+
+<div>Now displaying special property!</div>
+
+<!-- could also place this here -->
+<!-- <ng-template #myProperty> </ng-template> -->
 
 <div #specialProperty></div>
