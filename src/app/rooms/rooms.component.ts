@@ -7,7 +7,7 @@ import { Room, Rooms } from './rooms';
   templateUrl: './rooms.component.html',
   styleUrls: ['./rooms.component.scss']
 })
-export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterViewChecked { // hey, there's ngOnInit here :-)
+export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterViewChecked {
 
   boo: Boo;
 
@@ -16,7 +16,7 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
   hideRooms: boolean = false;
   rooms?: Rooms;
   nullRooms?: Rooms;
-  
+
   roomList: Room[] = [];
 
   title: string = 'Room List';
@@ -28,30 +28,29 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
   @ViewChild(HeaderComponent, { static: false }) headerComponent?: HeaderComponent;
 
   // for view children, static is false and cannot be set to true
-  @ViewChildren(HeaderComponent) headerChildrenComponent?: QueryList<HeaderComponent>;
+  @ViewChildren(HeaderComponent) headerChildrenComponent!: QueryList<HeaderComponent>;
 
   ngAfterViewInit(): void {
     this.headerComponent!.title = "Rooms View";
+
+    console.log(this.headerChildrenComponent);
+
+    this.headerChildrenComponent?.forEach(element =>
+      element.title = "modified title value using @ViewChildren");
+
+    this.headerChildrenComponent.last.title = "The very last title";
   }
 
   ngAfterViewChecked(): void {
     // triggered after one check ahs been performed - not used that much (only once)
     this.headerComponent!.title = "one time trigger actions";
-
-    console.log(this.headerChildrenComponent);
-
-    this.headerChildrenComponent?.forEach(element => 
-      element.title = "modified title value using @ViewChildren");
-
-    
-
   }
 
   constructor() {
     this.boo = new Boo("oh no", "anyway");
     this.numberOfRooms = 100;
   }
-  
+
   ngDoCheck(): void {
     console.log("do check is called");
   }
@@ -61,7 +60,7 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
     //console.log("Header component, where are thou? " + this.headerComponent);
 
     // just some data we can play with when learning directives (*ngIf)
-    this.rooms = { 
+    this.rooms = {
       totalRooms: 20,
       availableRooms: 4,
       bookedRooms: 5
@@ -118,11 +117,11 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
       checkinTime: new Date('11-November-2021'),
       checkoutTime: new Date('11-November-2021')
     };
-    
+
     this.roomList = [...this.roomList, newRoom];
-    // "push" will not work in OnPush mode, because OnPush does not register changes if reference does not change 
+    // "push" will not work in OnPush mode, because OnPush does not register changes if reference does not change
     // in contrast to the Default mode, which checks the data, but it's less efficient due to that
-    //this.roomList.push(newRoom); 
+    //this.roomList.push(newRoom);
   };
 
 }
@@ -130,7 +129,7 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
 class Boo {
   hoo: String;
   foo: String;
-  
+
   constructor(hoo: String, foo: String) {
     this.hoo = hoo;
     this.foo = foo;
