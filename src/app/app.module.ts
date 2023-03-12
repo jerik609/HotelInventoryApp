@@ -7,6 +7,8 @@ import { RoomsComponent } from './rooms/rooms.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RoomsListComponent } from './rooms/rooms-list/rooms-list.component';
 import { HeaderComponent } from './rooms/header/header.component';
+import { ContainerComponent } from './container/container.component';
+import { EmployeeComponent } from './employee/employee.component';
 
 // https://angular.io/guide/ngmodules
 // I can have any number of modules in my application, but there always has to be only one root module
@@ -21,7 +23,7 @@ import { HeaderComponent } from './rooms/header/header.component';
 
 @NgModule({ // annotation marking the class (AppModule) as module
   declarations: [ // any components, directives and pipes must be registered here
-    AppComponent, RoomsComponent, RoomsListComponent, HeaderComponent
+    AppComponent, RoomsComponent, RoomsListComponent, HeaderComponent, ContainerComponent, EmployeeComponent
   ],
   imports: [ // any module we intend to use, must be placed here (both external and those created by us)
     BrowserModule, // angular platform provided module, part of the browser library
