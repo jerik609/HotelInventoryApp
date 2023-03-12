@@ -14,6 +14,7 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
   hotelName: string = 'Best Hotel';
   numberOfRooms: number;
   hideRooms: boolean = false;
+  hideRoomList: boolean = false;
   rooms?: Rooms;
   nullRooms?: Rooms;
 
@@ -101,6 +102,10 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
   toggle() {
     this.hideRooms = !this.hideRooms;
     this.title = "Changed the value to something else";
+  }
+
+  toggleRoomList() {
+    this.hideRoomList = !this.hideRoomList;
   }
 
   selectRoom(room: Room): void {

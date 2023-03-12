@@ -14,13 +14,13 @@
 <p>Displaying a class attribute via interpolation: {{ boo.hoo }}</p> <!-- interpolation of a class member -->
 
 <div [hidden]="hideRooms">
-    Number of rooms: 
+    Number of rooms:
     <div [innerText]="numberOfRooms"></div> <!-- (HTML) property binding (this is called box syntax) -->
 </div>
 <button (click)="toggle()">Toggle!</button> <!-- event binding (this is called "banana syntax") -->
 
-<!-- using "element hiding" is not optimal: 
-    1. the data is still available on the DOM, only hidden, 
+<!-- using "element hiding" is not optimal:
+    1. the data is still available on the DOM, only hidden,
     2. if we have too many elements on the DOM, we'll have performance problems (even if hidden) -->
 
 <!-- solution - I will not display it, unless is needed -->
@@ -42,7 +42,12 @@
     <button (click)="addRoom()">Add Room</button>
 </div>
 
+<div>
+    <button (click)="toggleRoomList()">Toggle Rooms</button>
+</div>
+
 <!-- example of [ngStyle] and *ngIf -->
-<div [ngStyle]="{ 'font-weight': 'bold', 'color' : (rooms?.availableRooms ?? 0) > 5 ? 'green' : 'red' }" *ngIf="(rooms?.availableRooms ?? 0) > 0"> 
+<div [ngStyle]="{ 'font-weight': 'bold', 'color' : (rooms?.availableRooms ?? 0) > 5 ? 'green' : 'red' }"
+  *ngIf="hideRoomList && (rooms?.availableRooms ?? 0) > 0">
     <app-rooms-list [rooms]="roomList" [title]="title" (clickedRoom)="selectRoom($event)"></app-rooms-list>
 </div>

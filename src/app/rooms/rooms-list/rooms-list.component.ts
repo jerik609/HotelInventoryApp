@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, OnChanges, SimpleChanges } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, OnChanges, SimpleChanges, OnDestroy } from '@angular/core';
 import { Room } from '../rooms';
 
 @Component({
@@ -7,14 +7,18 @@ import { Room } from '../rooms';
   styleUrls: ['./rooms-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush // this is the default change detection strategy (all changes are detected)
 })
-export class RoomsListComponent implements OnChanges {
+export class RoomsListComponent implements OnChanges, OnDestroy {
 
   constructor() { }
+
+  ngOnDestroy(): void {
+    console.log("DESTROYED!!!");
+  }
 
   @Input() title: string = 'initial title';
 
   ngOnChanges(changes: SimpleChanges): void {
-    
+
     console.log(changes);
     console.log("current value of title: " + this.title);
     if (changes["title"]) {
@@ -24,7 +28,7 @@ export class RoomsListComponent implements OnChanges {
 
   // this is where we will receive our rooms data
   // here we will get the data
-  // when I add @Input, which states that: 
+  // when I add @Input, which states that:
   // make this rooms property a valid HTML property on this HTML element (app-rooms-list)
   // this property rooms becomes a property on top of this HTML tag
   // I guess we can then pass the data into it
