@@ -1,3 +1,4 @@
+import { RoomsService } from './services/rooms.service';
 import { AfterViewChecked, AfterViewInit, Component, DoCheck, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { HeaderComponent } from './header/header.component';
 import { Room, Rooms } from './rooms';
@@ -9,23 +10,46 @@ import { Room, Rooms } from './rooms';
 })
 export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterViewChecked {
 
-  boo: Boo;
+  boo!: Boo;
 
   hotelName: string = 'Best Hotel';
-  numberOfRooms: number;
+  numberOfRooms!: number;
   hideRooms: boolean = false;
   hideRoomList: boolean = false;
   rooms?: Rooms;
   nullRooms?: Rooms;
 
-  roomList: Room[] = [];
+  roomList!: Room[];
 
   title: string = 'Room List';
 
   selectedRoom?: Room;
 
-  // viewchild example
+  // https://stackoverflow.com/questions/35763730/difference-between-constructor-and-ngoninit
+  /*
+  Mostly we use ngOnInit for all the initialization/declaration and avoid stuff to work in the
+  constructor. The constructor should only be used to initialize class members but shouldn't do
+  actual "work".
+  */
+  constructor(private roomsService: RoomsService) {
+  }
 
+  ngOnInit(): void {
+    //console.log("Header component, where are thou? " + this.headerComponent);
+
+    this.boo = new Boo("oh no", "anyway");
+    this.numberOfRooms = 100;
+    this.roomList = this.roomsService.getRooms();
+
+    // just some data we can play with when learning directives (*ngIf)
+    this.rooms = {
+      totalRooms: 20,
+      availableRooms: 4,
+      bookedRooms: 5
+    }
+  }
+
+  // viewchild example
   @ViewChild(HeaderComponent, { static: false }) headerComponent?: HeaderComponent;
 
   // for view children, static is false and cannot be set to true
@@ -47,55 +71,9 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
     this.headerComponent!.title = "one time trigger actions";
   }
 
-  constructor() {
-    this.boo = new Boo("oh no", "anyway");
-    this.numberOfRooms = 100;
-  }
 
   ngDoCheck(): void {
     console.log("do check is called");
-  }
-
-  ngOnInit(): void {
-
-    //console.log("Header component, where are thou? " + this.headerComponent);
-
-    // just some data we can play with when learning directives (*ngIf)
-    this.rooms = {
-      totalRooms: 20,
-      availableRooms: 4,
-      bookedRooms: 5
-    }
-
-    // data for *ngFor, we have data, let's bind it
-    this.roomList = [{
-      number: 1,
-      type: 'Deluxe Room',
-      amenities: ['Air Conditioning', 'Free WiFi'],
-      photos: ['photos/1.jpg', 'photos/2.jpg', 'photos/3.jpg'],
-      price: 100,
-      checkinTime: new Date('11-November-2021'),
-      checkoutTime: new Date('11-November-2021')
-    },
-    {
-      number: 2,
-      type: 'Standard Room',
-      amenities: ['Air Conditioning', 'Free WiFi'],
-      photos: ['photos/1.jpg', 'photos/2.jpg', 'photos/3'],
-      price: 50,
-      checkinTime: new Date('11-November-2021'),
-      checkoutTime: new Date('11-November-2021')
-    },
-    {
-      number: 3,
-      type: 'Lowcost Room',
-      amenities: ['Air Conditioning', 'Free WiFi'],
-      photos: ['photos/1.jpg', 'photos/2.jpg', 'photos/3'],
-      price: 20,
-      checkinTime: new Date('11-November-2021'),
-      checkoutTime: new Date('11-November-2021')
-    }];
-
   }
 
   // a toggle function :-)
