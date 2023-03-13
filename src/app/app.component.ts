@@ -4,7 +4,7 @@ import { RoomsComponent } from './rooms/rooms.component';
 @Component({
   selector: 'app-root', // "name" of the component - this is the name we will use to refer to this component in the html file (index.html)
   templateUrl: './app.component.html',
-  //but we can do it inline too: 
+  //but we can do it inline too:
   // example of muiltiline - use backticks
   // template: `
   //   <h1>Hello from inline template!</h1>
@@ -20,7 +20,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 
   // dynamic component creation example
   @ViewChild("myProperty", { read: ViewContainerRef }) ref?: ViewContainerRef;
-  
+
   ngAfterViewInit(): void {
     let component = this.ref?.createComponent(RoomsComponent);
     component!.instance.hotelName = "No-Tell Motel";

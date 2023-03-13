@@ -6,8 +6,26 @@ import { Room } from '../rooms';
 })
 export class RoomsService {
 
+  theRooms!: Room[];
+
+  setRooms(rooms: Room[]) {
+    this.theRooms = rooms;
+  }
+
   getRooms(): Room[] {
-    return [{
+    console.log("RoomsService: getRooms")
+    return this.theRooms;
+  }
+
+  constructor() {
+    console.log("RoomsService: constructor");
+    this.initializeMe();
+  }
+
+  initializeMe() {
+    console.log("RoomsService: initializeMe")
+
+    this.theRooms = [{
       number: 1,
       type: 'Deluxe Room',
       amenities: ['Air Conditioning', 'Free WiFi'],
@@ -37,6 +55,4 @@ export class RoomsService {
 
   }
 
-
-  constructor() { }
 }
