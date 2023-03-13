@@ -102,7 +102,9 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
       checkoutTime: new Date('11-November-2021')
     };
 
-    this.roomList = [...this.roomList, newRoom];
+    this.roomsService.setRooms([...this.roomList, newRoom]);
+
+    this.roomList = this.roomsService.getRooms(); //[...this.roomList, newRoom];
     // "push" will not work in OnPush mode, because OnPush does not register changes if reference does not change
     // in contrast to the Default mode, which checks the data, but it's less efficient due to that
     //this.roomList.push(newRoom);

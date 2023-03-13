@@ -44,8 +44,4 @@ export class RoomsListComponent implements OnChanges, OnDestroy {
     this.clickedRoom.emit(room);
   }
 
-
-
-
-
 }
