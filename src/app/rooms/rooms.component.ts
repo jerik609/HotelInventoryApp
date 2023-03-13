@@ -83,6 +83,7 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
   }
 
   toggleRoomList() {
+    this.roomList = this.roomsService.getRooms();
     this.hideRoomList = !this.hideRoomList;
   }
 

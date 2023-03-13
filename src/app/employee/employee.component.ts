@@ -22,6 +22,4 @@ export class EmployeeComponent implements AfterViewInit {
     console.log(this.notProvided == undefined ? "not-provided is undefined" : this.notProvided.hello);
   }
 
-
-
 }

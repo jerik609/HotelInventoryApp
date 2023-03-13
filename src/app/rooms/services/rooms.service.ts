@@ -10,6 +10,7 @@ export class RoomsService {
 
   setRooms(rooms: Room[]) {
     this.theRooms = rooms;
+    console.log("rooms set to: " + rooms);
   }
 
   getRooms(): Room[] {
