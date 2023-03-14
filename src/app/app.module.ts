@@ -1,3 +1,4 @@
+import { APP_CONFIG, APP_SERVICE_CONFIG } from './app-config/appconfig.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -29,7 +30,12 @@ import { EmployeeComponent } from './employee/employee.component';
     BrowserModule, // angular platform provided module, part of the browser library
     AppRoutingModule, BrowserAnimationsModule // approuting module is created by us
   ],
-  providers: [],
+  providers: [
+    {
+      provide: APP_SERVICE_CONFIG,
+      useValue: APP_CONFIG
+    }
+  ],
   bootstrap: [AppComponent] // this defines, which component will be loaded first (the root component)
 })
 export class AppModule { } // the root module of the application
