@@ -98,4 +98,35 @@ The is a more cleaner way to handle configuration properties - it's more flexibl
 
 This works for all similar javascript constructs too.
 
+First we will create the respective injection token (value provider) `localstorage.token.ts`:
+```
+import { InjectionToken } from '@angular/core';
 
+export const LocalStorageToken = new InjectionToken<any>("local storage", {
+  providedIn: "root",
+  factory() {
+    return localStorage;
+  }
+})
+```
+Here we use providedIn set to root - so we can remove it easily if not needed. Then we use the factory method to create the instance.
+
+This service does not need to be registered anywhere (perhaps due to the `providedIn`?) - let's just use it:
+```
+import { AfterViewInit, Component, ElementRef, Inject, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { RoomsComponent } from './rooms/rooms.component';
+import { LocalStorageToken } from './localstorage.token'
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html'
+})
+export class AppComponent implements AfterViewInit, OnInit {
+...
+  constructor(@Inject(LocalStorageToken) private localStorage: Storage) {
+    localStorage.setItem("helloThing", "the hello thing which says: hello there my friend!")
+  }
+...
+}
+```
+The set value can be checked in e.g. chrome - developer tools - application - localstorage.
