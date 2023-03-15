@@ -2,6 +2,8 @@ import { RoomsService } from './services/rooms.service';
 import { AfterViewChecked, AfterViewInit, Component, DoCheck, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { HeaderComponent } from './header/header.component';
 import { Room, Rooms } from './rooms';
+import { Observable } from 'rxjs';
+import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-rooms',
@@ -25,6 +27,16 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
 
   selectedRoom?: Room;
 
+  data: Observable<string> = new Observable<string>(
+    subscriber => {
+      subscriber.next('Hello');
+      subscriber.next(',');
+      subscriber.next('World');
+      subscriber.next('!');
+      subscriber.complete();
+    }
+  );
+
   // https://stackoverflow.com/questions/35763730/difference-between-constructor-and-ngoninit
   /*
   Mostly we use ngOnInit for all the initialization/declaration and avoid stuff to work in the
@@ -36,6 +48,12 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
 
   ngOnInit(): void {
     //console.log("Header component, where are thou? " + this.headerComponent);
+
+    this.data.subscribe({
+      next: data => console.log(data),
+      error: error => console.log(error.message),
+      complete: () => console.log("I'm done here!")
+    });
 
     this.boo = new Boo("oh no", "anyway");
     this.numberOfRooms = 100;
@@ -50,13 +68,37 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
     }
   }
 
-  getRooms() {
+  getRooms(): void {
     this.roomsService.getRooms().subscribe({
       next: (rooms) => this.roomList = rooms,
       error: (error) => console.log(error.message),
       complete: () => console.log("done reading the rooms list!")
     })
   }
+
+  addRoom(): void {
+    const newRoom: Room = {
+      //number: `${this.roomList.length + 1}`,
+      roomType: 'Standard Room',
+      amenities: ['Chocolate Fountain', 'Free Beer'],
+      photos: ['photos/1.jpg', 'photos/2.jpg', 'photos/3'],
+      price: 1500,
+      checkinTime: new Date('11-November-2021'),
+      checkoutTime: new Date('11-November-2021')
+    };
+
+    this.roomsService.addRoom(newRoom).subscribe({
+      // due to making sure OnPush mode can function, we should not update existing references,
+      // but replace them with new ones, so that changes are picked up by change detection
+      // i.e. this.roomList.push(room) would work data-wise, but not display wise
+      next: (room) => {
+        console.log("Adding room: " + JSON.stringify(room));
+        this.roomList = [...this.roomList, room];
+      },
+      error: (error) => console.log(error.message),
+      complete: () => console.log("done reading the rooms list!")
+    })
+  };
 
   // viewchild example
   @ViewChild(HeaderComponent, { static: false }) headerComponent?: HeaderComponent;
@@ -80,7 +122,6 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
     this.headerComponent!.title = "one time trigger actions";
   }
 
-
   ngDoCheck(): void {
     console.log("do check is called");
   }
@@ -99,25 +140,6 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
   selectRoom(room: Room): void {
     this.selectedRoom = room;
   }
-
-  addRoom() {
-    const newRoom: Room = {
-      number: `${this.roomList.length + 1}`,
-      type: 'Standard Room',
-      amenities: ['Chocolate Fountain', 'Free Beer'],
-      photos: ['photos/1.jpg', 'photos/2.jpg', 'photos/3'],
-      price: 1500,
-      checkinTime: new Date('11-November-2021'),
-      checkoutTime: new Date('11-November-2021')
-    };
-
-    this.roomsService.setRooms([...this.roomList, newRoom]);
-
-    //this.roomList = this.roomsService.getRooms(); //[...this.roomList, newRoom];
-    // "push" will not work in OnPush mode, because OnPush does not register changes if reference does not change
-    // in contrast to the Default mode, which checks the data, but it's less efficient due to that
-    //this.roomList.push(newRoom);
-  };
 
 }
 

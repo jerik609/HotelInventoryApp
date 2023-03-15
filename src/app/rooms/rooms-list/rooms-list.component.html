@@ -17,10 +17,10 @@
         <th>Select room</th>
     </tr>
     <tr [ngClass]="e ? 'even' : 'odd'" *ngFor="let room of rooms; let e=even; let o=odd; let i=index">
-        <td>{{ i | percent }}</td>
+        <td>{{ i | percent }}</td> <!-- | number:'4.1-5' -->
         <td>{{ e ? "Even" : "Odd" }}</td>
-        <td>{{ room.number | number:'4.1-5' }}</td>
-        <td>{{ room.type | uppercase}}</td>
+        <td>{{ room.roomNumber }}</td>
+        <td>{{ room.roomType | uppercase}}</td>
         <td>{{ room.price | currency: 'CZK' }}</td>
         <td>{{ room.amenities | json }}</td>
         <td>{{ room.checkinTime | date: 'MMM d, y, h:mm:ss a' }}</td> <!-- DatePipe example -->
