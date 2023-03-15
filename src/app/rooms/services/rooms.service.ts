@@ -26,7 +26,7 @@ export class RoomsService {
 
   addRoom(room: Room): Observable<Room> {
     console.log("Adding a room: " + room);
-    return this.httpClient.post<Room>('/api/room', room);
+    return this.httpClient.post<Room>('/api/rooms', room);
   }
 
   constructor(@Inject(APP_SERVICE_CONFIG) private appConfig: AppConfig, private httpClient: HttpClient) {
