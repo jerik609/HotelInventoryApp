@@ -39,7 +39,8 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
 
     this.boo = new Boo("oh no", "anyway");
     this.numberOfRooms = 100;
-    this.roomList = this.roomsService.getRooms();
+    
+    this.getRooms();
 
     // just some data we can play with when learning directives (*ngIf)
     this.rooms = {
@@ -47,6 +48,14 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
       availableRooms: 4,
       bookedRooms: 5
     }
+  }
+
+  getRooms() {
+    this.roomsService.getRooms().subscribe({
+      next: (rooms) => this.roomList = rooms,
+      error: (error) => console.log(error.message),
+      complete: () => console.log("done reading the rooms list!")
+    })
   }
 
   // viewchild example
@@ -83,7 +92,7 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
   }
 
   toggleRoomList() {
-    this.roomList = this.roomsService.getRooms();
+    //this.roomList = this.roomsService.getRooms();
     this.hideRoomList = !this.hideRoomList;
   }
 
@@ -93,7 +102,7 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
 
   addRoom() {
     const newRoom: Room = {
-      number: this.roomList.length + 1,
+      number: `${this.roomList.length + 1}`,
       type: 'Standard Room',
       amenities: ['Chocolate Fountain', 'Free Beer'],
       photos: ['photos/1.jpg', 'photos/2.jpg', 'photos/3'],
@@ -104,7 +113,7 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
 
     this.roomsService.setRooms([...this.roomList, newRoom]);
 
-    this.roomList = this.roomsService.getRooms(); //[...this.roomList, newRoom];
+    //this.roomList = this.roomsService.getRooms(); //[...this.roomList, newRoom];
     // "push" will not work in OnPush mode, because OnPush does not register changes if reference does not change
     // in contrast to the Default mode, which checks the data, but it's less efficient due to that
     //this.roomList.push(newRoom);
