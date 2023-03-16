@@ -1,8 +1,8 @@
 import { RoomsService } from './services/rooms.service';
-import { AfterViewChecked, AfterViewInit, ChangeDetectionStrategy, Component, DoCheck, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, ChangeDetectionStrategy, Component, DoCheck, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { HeaderComponent } from './header/header.component';
 import { Room, Rooms } from './rooms';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { HttpEventType, HttpHeaderResponse } from '@angular/common/http';
 
 @Component({
@@ -11,7 +11,7 @@ import { HttpEventType, HttpHeaderResponse } from '@angular/common/http';
   styleUrls: ['./rooms.component.scss'],
   changeDetection: ChangeDetectionStrategy.Default
 })
-export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterViewChecked {
+export class RoomsComponent implements OnDestroy, OnInit, DoCheck, AfterViewInit, AfterViewChecked {
 
   boo!: Boo;
 
@@ -59,7 +59,7 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
     this.boo = new Boo("oh no", "anyway");
     this.numberOfRooms = 100;
     
-    this.getRooms();
+    //this.getRooms();
 
     // just some data we can play with when learning directives (*ngIf)
     this.rooms = {
@@ -69,12 +69,21 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
     }
   }
 
-  getRooms(): void {
-    this.roomsService.getRooms$.subscribe({
-      next: (rooms) => this.roomList = rooms,
-      error: (error) => console.log(error.message),
-      complete: () => console.log("done reading the rooms list!")
-    })
+  subscription!: Subscription;
+
+  getRooms$: Observable<Room[]> = this.roomsService.getRooms$;
+
+  // getRooms(): void {
+  //   this.subscription = this.roomsService.getRooms$.subscribe({
+  //     next: (rooms) => this.roomList = rooms,
+  //     error: (error) => console.log(error.message),
+  //     complete: () => console.log("done reading the rooms list!")
+  //   })
+  // }
+
+  ngOnDestroy(): void {
+    console.log("DESTROY ALL HUMANS!!!");
+    this.subscription.unsubscribe();
   }
 
   addRoom(): void {
@@ -193,7 +202,7 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
   }
 
   toggleRoomList() {
-    this.getRooms();
+    //this.getRooms();
     this.hideRoomList = !this.hideRoomList;
   }
 

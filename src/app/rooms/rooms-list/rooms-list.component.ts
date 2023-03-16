@@ -32,7 +32,7 @@ export class RoomsListComponent implements OnChanges, OnDestroy {
   // make this rooms property a valid HTML property on this HTML element (app-rooms-list)
   // this property rooms becomes a property on top of this HTML tag
   // I guess we can then pass the data into it
-  @Input() rooms: Room[] = []
+  @Input() rooms: Room[] | null = []
 
   // now since this component is a child component and it's supposed to be a little dumb,
   // it does not know how to do things on its own

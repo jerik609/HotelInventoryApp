@@ -16,7 +16,7 @@ export class RoomsService {
 
   // let's use observables as attributes:
   getRooms$ = this.httpClient.get<Room[]>('/api/rooms').pipe(
-    shareReplay()
+    shareReplay(1)
   );
 
   setRooms(rooms: Room[]) {
