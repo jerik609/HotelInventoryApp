@@ -3,6 +3,7 @@ import { AfterViewChecked, AfterViewInit, ChangeDetectionStrategy, Component, Do
 import { HeaderComponent } from './header/header.component';
 import { Room, Rooms } from './rooms';
 import { Observable } from 'rxjs';
+import { HttpEventType, HttpHeaderResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-rooms',
@@ -98,7 +99,66 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
       error: (error) => console.log(error.message),
       complete: () => console.log("done reading the rooms list!")
     })
-  };
+  }
+
+  editRoom(): void {
+    const newRoom: Room = {
+      roomNumber: '3',
+      roomType: 'Super Dooper Fancy Room',
+      amenities: ['Challenger 2 Simulator', 'Free Beer'],
+      photos: ['photos/challenger.jpg', 'photos/2.jpg', 'photos/3'],
+      price: 99999,
+      checkinTime: new Date('11-November-2023'),
+      checkoutTime: new Date('11-November-2023')
+    };
+
+    this.roomsService.updateRoom(newRoom).subscribe({
+      next: (room) => {
+        console.log("Updated room: " + JSON.stringify(room));
+        let filtered = this.roomList.filter(x => x.roomNumber !== room.roomNumber);
+        this.roomList = [...filtered, room];
+      },
+      error: (error) => console.log(error.message),
+      complete: () => console.log("done reading the update room list!")
+    })
+  }
+
+  deleteRoom(): void {
+    this.roomsService.deleteRoom(3);
+  }
+
+  totalBytes: number = 0;
+
+  getPhotos(): void {
+    console.log("USER CLICKED ON GET PHOTOS!");
+    this.roomsService.getPhotos().subscribe({
+      next: event => {
+        console.log(event);
+        switch(event.type) {
+          case HttpEventType.Sent:
+            console.log("Request has been made!");
+            break;
+          case HttpEventType.ResponseHeader:
+            console.log("Request success!");
+            this.totalBytes = 0;
+            break;
+          case HttpEventType.DownloadProgress:
+            this.totalBytes += event.loaded;
+            console.log("Transferred so far: " + this.totalBytes);
+            console.log("Total bytes to transfer: " + (event.total ?? "unknown for this request"));
+            break;
+          case HttpEventType.Response:
+            console.log("Request complete!");
+            console.log("the data: " + event.body);
+            break;
+          default: 
+            console.log("unexpected value: " + event.type);
+        }
+      },
+      error: error => console.log(error.message),
+      complete: () => console.log("done reading, observable sent complete!")
+    });
+  }
 
   // viewchild example
   @ViewChild(HeaderComponent, { static: false }) headerComponent?: HeaderComponent;
@@ -133,7 +193,7 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
   }
 
   toggleRoomList() {
-    //this.roomList = this.roomsService.getRooms();
+    this.getRooms();
     this.hideRoomList = !this.hideRoomList;
   }
 

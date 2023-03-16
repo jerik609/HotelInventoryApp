@@ -3,7 +3,7 @@ import { APP_SERVICE_CONFIG } from './../../app-config/appconfig.service';
 import { Inject, Injectable } from '@angular/core';
 import { Room } from '../rooms';
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpRequest } from '@angular/common/http';
 //import { environment } from '../../../environments/environment'
 
 @Injectable({
@@ -27,6 +27,27 @@ export class RoomsService {
   addRoom(room: Room): Observable<Room> {
     console.log("Adding a room: " + room);
     return this.httpClient.post<Room>('/api/rooms', room);
+  }
+
+  updateRoom(room: Room): Observable<Room> {
+    console.log("Updating a room: " + room)
+    return this.httpClient.put<Room>(`/api/rooms/${room.roomNumber}`, room);
+  }
+
+  deleteRoom(roomNumber: number): Observable<Room> {
+    return this.httpClient.delete<Room>(`/api/room/${roomNumber}`);
+  }
+
+  // request api - reading from an API with a lot of data
+  getPhotos(): Observable<HttpEvent<unknown>> {
+    const request = new HttpRequest(
+      'GET', 
+      'https://jsonplaceholder.typicode.com/photos',
+      { 
+        reportProgress: true
+      }
+    );
+    return this.httpClient.request(request);
   }
 
   constructor(@Inject(APP_SERVICE_CONFIG) private appConfig: AppConfig, private httpClient: HttpClient) {
