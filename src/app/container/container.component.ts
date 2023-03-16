@@ -5,14 +5,14 @@ import { EmployeeComponent } from '../employee/employee.component';
 @Component({
   selector: 'app-container',
   templateUrl: './container.component.html',
-  styleUrls: ['./container.component.scss'],
-  providers: [RoomsService]
+  styleUrls: ['./container.component.scss'] //,
+  //providers: [RoomsService]
 })
 export class ContainerComponent implements AfterContentInit {
 
   @ContentChild(EmployeeComponent) employeeComponent!: EmployeeComponent;
 
-  constructor(@Host() private roomsService: RoomsService) {
+  constructor() { //@Host() private roomsService: RoomsService) {
   }
 
   ngAfterContentInit(): void {

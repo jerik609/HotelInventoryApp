@@ -70,7 +70,7 @@ export class RoomsComponent implements OnInit, DoCheck, AfterViewInit, AfterView
   }
 
   getRooms(): void {
-    this.roomsService.getRooms().subscribe({
+    this.roomsService.getRooms$.subscribe({
       next: (rooms) => this.roomList = rooms,
       error: (error) => console.log(error.message),
       complete: () => console.log("done reading the rooms list!")

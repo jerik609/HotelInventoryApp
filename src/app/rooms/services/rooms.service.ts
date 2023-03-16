@@ -2,7 +2,7 @@ import { AppConfig } from './../../app-config/appconfig.interface';
 import { APP_SERVICE_CONFIG } from './../../app-config/appconfig.service';
 import { Inject, Injectable } from '@angular/core';
 import { Room } from '../rooms';
-import { Observable } from 'rxjs';
+import { Observable, shareReplay } from 'rxjs';
 import { HttpClient, HttpEvent, HttpRequest } from '@angular/common/http';
 //import { environment } from '../../../environments/environment'
 
@@ -13,16 +13,22 @@ export class RoomsService {
 
   //theRooms!: Room[];
 
+
+  // let's use observables as attributes:
+  getRooms$ = this.httpClient.get<Room[]>('/api/rooms').pipe(
+    shareReplay()
+  );
+
   setRooms(rooms: Room[]) {
     //this.theRooms = rooms;
     console.log("rooms set to: " + rooms);
   }
 
-  getRooms(): Observable<Room[]> {
-    console.log("RoomsService: getRooms");
-    //return this.theRooms;
-    return this.httpClient.get<Room[]>("/api/rooms");
-  }
+  // getRooms(): Observable<Room[]> {
+  //   console.log("RoomsService: getRooms");
+  //   //return this.theRooms;
+  //   return this.httpClient.get<Room[]>("/api/rooms");
+  // }
 
   addRoom(room: Room): Observable<Room> {
     console.log("Adding a room: " + room);
