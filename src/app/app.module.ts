@@ -1,5 +1,5 @@
 import { APP_CONFIG, APP_SERVICE_CONFIG } from './app-config/appconfig.service';
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -12,6 +12,7 @@ import { ContainerComponent } from './container/container.component';
 import { EmployeeComponent } from './employee/employee.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RequestInterceptor } from './request.interceptor';
+import { InitService } from './init.service';
 
 // https://angular.io/guide/ngmodules
 // I can have any number of modules in my application, but there always has to be only one root module
@@ -23,6 +24,10 @@ import { RequestInterceptor } from './request.interceptor';
 // NOTE: there are two "bootstraps" we're talking about here:
 // - the module bootstrap in main.ts - defining the root module
 // - the component bootstrap in @NgModule - defining which component will be the root component
+
+function initFactory(initService: InitService){
+  return () => initService.init();
+}
 
 @NgModule({ // annotation marking the class (AppModule) as module
   declarations: [ // any components, directives and pipes must be registered here
@@ -42,6 +47,12 @@ import { RequestInterceptor } from './request.interceptor';
       provide: HTTP_INTERCEPTORS,
       useClass: RequestInterceptor,
       multi: true
+    },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initFactory,
+      deps: [InitService],
+      multi: true // there are more here
     }
   ],
   bootstrap: [AppComponent] // this defines, which component will be loaded first (the root component)

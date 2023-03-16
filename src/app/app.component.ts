@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, ElementRef, Inject, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { RoomsComponent } from './rooms/rooms.component';
 import { LocalStorageToken } from './localstorage.token'
+import { InitService } from './init.service';
 
 @Component({
   selector: 'app-root', // "name" of the component - this is the name we will use to refer to this component in the html file (index.html)
@@ -33,7 +34,8 @@ export class AppComponent implements AfterViewInit, OnInit {
     this.name.nativeElement.innerText = "Well, hello there!";
   }
 
-  constructor(@Inject(LocalStorageToken) private localStorage: Storage) {
+  constructor(@Inject(LocalStorageToken) private localStorage: Storage, private initService: InitService) {
+    console.log('Our configuration!: ', initService.getConfig())
     localStorage.setItem("helloThing", "the hello thing which says: hello there my friend!")
   }
 
