@@ -3,7 +3,7 @@ import { APP_SERVICE_CONFIG } from './../../app-config/appconfig.service';
 import { Inject, Injectable } from '@angular/core';
 import { Room } from '../rooms';
 import { catchError, map, Observable, of, reduce, shareReplay, Subject } from 'rxjs';
-import { HttpClient, HttpEvent, HttpRequest } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpHeaders, HttpRequest } from '@angular/common/http';
 //import { environment } from '../../../environments/environment'
 
 @Injectable({
@@ -18,15 +18,22 @@ export class RoomsService {
 
   getErrors$ = this.errorSink$.asObservable();
 
-  // let's use observables as attributes:
-  getRooms$ = this.httpClient.get<Room[]>('/api/rooms').pipe(
-    catchError(error => {
-      this.errorSink$.next(error.message);
-      return of([]);
-    }),
-    shareReplay(1)
-  );
+  // headers: HttpHeaders = new HttpHeaders()
+  //   .set('token', '39483298742398749283abc')
+  //   .set('cow_says', 'MoooOOOOooooooOOOOOOooOOOOo!');
 
+  // let's use observables as attributes:
+  getRooms$ = this.httpClient.get<Room[]>(
+      '/api/rooms'//, 
+      //{headers: this.headers}
+    ).pipe(
+      catchError(error => {
+        this.errorSink$.next(error.message);
+        return of([]);
+      }),
+      shareReplay(1)
+  );
+ 
   roomCount$ = this.getRooms$.pipe(
     reduce<Room[], number>((acc, rooms) => acc + rooms.length, 0)
   );
