@@ -54,6 +54,9 @@
 
 <!-- *ngIf="!hideRoomList && (rooms?.availableRooms ?? 0) > 0" -->
 
+<h3>Errors: {{ getErrors$ | async }}</h3>
+<h3>Room count: {{ getRoomCount$ | async }} </h3>
+
 <!-- example of [ngStyle] and *ngIf -->
 <div [ngStyle]="{ 'font-weight': 'bold', 'color' : (rooms?.availableRooms ?? 0) > 5 ? 'green' : 'red' }"
     *ngIf="!hideRoomList && (getRooms$ | async) as theRoomz">

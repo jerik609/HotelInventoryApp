@@ -72,6 +72,8 @@ export class RoomsComponent implements OnDestroy, OnInit, DoCheck, AfterViewInit
   subscription!: Subscription;
 
   getRooms$: Observable<Room[]> = this.roomsService.getRooms$;
+  getErrors$: Observable<string> = this.roomsService.getErrors$;
+  getRoomCount$: Observable<number> = this.roomsService.roomCount$;
 
   // getRooms(): void {
   //   this.subscription = this.roomsService.getRooms$.subscribe({

@@ -2,7 +2,7 @@ import { AppConfig } from './../../app-config/appconfig.interface';
 import { APP_SERVICE_CONFIG } from './../../app-config/appconfig.service';
 import { Inject, Injectable } from '@angular/core';
 import { Room } from '../rooms';
-import { Observable, shareReplay } from 'rxjs';
+import { catchError, map, Observable, of, reduce, shareReplay, Subject } from 'rxjs';
 import { HttpClient, HttpEvent, HttpRequest } from '@angular/common/http';
 //import { environment } from '../../../environments/environment'
 
@@ -13,10 +13,26 @@ export class RoomsService {
 
   //theRooms!: Room[];
 
+  // we will place our errors here
+  errorSink$: Subject<string> = new Subject<string>;
+
+  getErrors$ = this.errorSink$.asObservable();
 
   // let's use observables as attributes:
   getRooms$ = this.httpClient.get<Room[]>('/api/rooms').pipe(
+    catchError(error => {
+      this.errorSink$.next(error.message);
+      return of([]);
+    }),
     shareReplay(1)
+  );
+
+  roomCount$ = this.getRooms$.pipe(
+    reduce<Room[], number>((acc, rooms) => acc + rooms.length, 0)
+  );
+
+  roomCountPerRequest$ = this.getRooms$.pipe(
+    map<Room[], number>((rooms) => rooms.length)
   );
 
   setRooms(rooms: Room[]) {
