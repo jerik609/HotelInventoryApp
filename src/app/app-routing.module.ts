@@ -9,7 +9,7 @@ import { RoomsComponent } from './rooms/rooms.component';
 const routes: Routes = [
   { path:'employee', component: EmployeeComponent },
   { path:'rooms', component: RoomsComponent },
-  { path:'rooms/:id', component: BookingComponent },
+  { path:'rooms/:roomid', component: BookingComponent },
   { path:'', redirectTo:'/rooms', pathMatch: 'full'},
   { path:'**', component: NotfoundComponent }
 ];
