@@ -25,7 +25,9 @@ export class AppComponent implements AfterViewInit, OnInit {
 
   ngAfterViewInit(): void {
     let component = this.ref?.createComponent(RoomsComponent);
-    component!.instance.hotelName = "No-Tell Motel";
+    if (component !== undefined) {
+      component!.instance.hotelName = "No-Tell Motel";
+    }
   }
 
   // accessing any tag - example
