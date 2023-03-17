@@ -1,32 +1,35 @@
-<h1>---=== Angular Application Demo ===---</h1>
+<!-- <h1>---=== Angular Application Demo ===---</h1> -->
 
-<app-container>
+<!-- <app-container>
   <app-rooms></app-rooms>
   <app-employee></app-employee>
   <h1>This is from NG CONTENT!</h1>
-</app-container>
+</app-container> -->
 
-<br>
-<div>======================================================</div>
+<!-- <br> -->
+<!-- <div>======================================================</div> -->
 <!-- example of ngSwitch - let's imagine we want to display room information to admin, but not the user -->
-<div [ngSwitch]="role">
+<!-- <div [ngSwitch]="role">
     <div *ngSwitchCase="'User'">
         Welcome User!
-    </div>
-    <div *ngSwitchCase="'Admin'"> <!-- must use "'string'" so that it's really taken as string and not as a variable -->
+    </div> -->
+    <!-- must use "'string'" so that it's really taken as string and not as a variable -->
+    <!-- <div *ngSwitchCase="'Admin'">  -->
         <!-- <app-rooms></app-rooms> -->
-        <ng-template #myProperty> </ng-template>
+        <!-- <ng-template #myProperty> </ng-template>
     </div>
     <div *ngSwitchDefault>
         Undefined role, no way I'm displaying anything!
     </div>
-</div>
-<div>======================================================</div>
-<br>
+</div> -->
+<!-- <div>======================================================</div>
+<br> -->
 
-<div>Now displaying special property!</div>
+<!-- <div>Now displaying special property!</div> -->
 
 <!-- could also place this here -->
 <!-- <ng-template #myProperty> </ng-template> -->
 
-<div #specialProperty></div>
+<!-- <div #specialProperty></div> -->
+
+<router-outlet></router-outlet>
