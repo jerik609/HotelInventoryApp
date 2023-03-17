@@ -85,7 +85,9 @@ export class RoomsComponent implements OnDestroy, OnInit, DoCheck, AfterViewInit
 
   ngOnDestroy(): void {
     console.log("DESTROY ALL HUMANS!!!");
-    this.subscription.unsubscribe();
+    if (this.subscription !== undefined) {
+      this.subscription.unsubscribe();
+    }
   }
 
   addRoom(): void {
