@@ -1,9 +1,9 @@
 <form>
     <div class="form-group">
-        <input appHover type="email" class="form-control" name="name" [(ngModel)]="email" placeholder="Enter your email as username">
+        <input [appHover] = "'yellow'" type="email" class="form-control" name="name" [(ngModel)]="email" placeholder="Enter your email as username">
     </div>
     <div>
-        <input appHover type="password" class="form-control" name="password" [(ngModel)]="password" placeholder="Enter your password">
+        <input [appHover] = "'steelblue'" type="password" class="form-control" name="password" [(ngModel)]="password" placeholder="Enter your password">
     </div>
     <div>
         <button class="btn btn-primary" (click)="login()">Login</button>
