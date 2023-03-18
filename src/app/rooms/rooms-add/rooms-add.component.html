@@ -1,35 +1,81 @@
 {{ room | json }}
 
-<div class="alert alert-success">
+<br>
+<br>
+
+<h2>Is form pristine: {{ roomAddForm.pristine | json }}</h2>
+<h2>Is form dirty: {{ roomAddForm.dirty | json }}</h2>
+<h2>Is form valid: {{ roomAddForm.valid | json }}</h2>
+<h2>Is form invalid: {{ roomAddForm.invalid | json }}</h2>
+<h2>Form value: {{ roomAddForm.value | json }}</h2>
+
+<div *ngIf="successMessage !== ''" class="alert alert-success">
     {{ successMessage }}
 </div>
 
-<form (ngSubmit) = "addRoom()">
+<form #roomAddForm ="ngForm" (ngSubmit) = "addRoom()">
     <!-- <div class="form-group">
         <input class="form-control" type="text" name="roomNumber">
     </div> -->
     <div class="form-group">
-        <input class="form-control" type="text" name="roomType" [(ngModel)]="room.roomType" placeholder="Room Type">
+        <input 
+            required
+            class="form-control" type="text" name="roomType" [(ngModel)]="room.roomType" placeholder="Room Type"
+        />
     </div>
     <div class="form-group">
-        <input class="form-control" type="text" name="amenities" [(ngModel)]="room.amenities" placeholder="Amenitites">
+        <input 
+            #roomAmenities="ngModel"
+            required
+            minlength="5"
+            maxlength="20"
+            class="form-control" 
+            type="text" 
+            name="amenities" 
+            [(ngModel)]="room.amenities" 
+            placeholder="Amenitites"
+        />
+        <div class="alert alert-danger" *ngIf="roomAmenities.errors !== null"> 
+            {{ roomAmenities.errors | json }} 
+        </div>
     </div>
     <div class="form-group">
-        <input class="form-control" type="number" name="price" [(ngModel)]="room.price"
-            placeholder="Room Price (per night)">
+        <input 
+            #roomPrice="ngModel"
+            required
+            min="100"
+            max="500"
+            class="form-control" type="number" name="price" [(ngModel)]="room.price"
+            placeholder="Room Price (per night)"
+        />
+        <div class="alert alert-danger" *ngIf="roomPrice.errors !== null"> 
+            {{ roomPrice.errors | json }} 
+        </div>
     </div>
     <div class="form-group">
-        <input class="form-control" type="text" name="photos" [(ngModel)]="room.photos" placeholder="Photos">
+        <input 
+            required
+            class="form-control" type="text" name="photos" [(ngModel)]="room.photos"
+            placeholder="Photos"
+        />
     </div>
     <div class="form-group">
-        <input class="form-control" type="datetime" name="checkinTime" [(ngModel)]="room.checkinTime"
-            placeholder="Check-in time">
+        <input 
+            required
+            class="form-control" type="datetime" name="checkinTime" [(ngModel)]="room.checkinTime"
+            placeholder="Check-in time"
+        />
     </div>
     <div class="form-group">
-        <input class="form-control" type="datetime" name="checkoutTime" [(ngModel)]="room.checkoutTime"
-            placeholder="Check-out-time">
+        <input 
+            required
+            class="form-control" type="datetime" name="checkoutTime" [(ngModel)]="room.checkoutTime"
+            placeholder="Check-out-time"
+        />
     </div>
     <div>
-        <button class="btn btn-primary" type="submit">Submit</button>
+        <button [disabled]="roomAddForm.invalid" class="btn btn-primary" type="submit">
+            Submit
+        </button>
     </div>
 </form>
