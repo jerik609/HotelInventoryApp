@@ -54,7 +54,7 @@ export class RoomsService {
   // }
 
   addRoom(room: Room): Observable<Room> {
-    console.log("Adding a room: " + room);
+    console.log("Adding a room: ", room);
     return this.httpClient.post<Room>('/api/rooms', room);
   }
 

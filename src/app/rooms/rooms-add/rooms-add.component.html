@@ -1,26 +1,35 @@
-<form>
+{{ room | json }}
+
+<div class="alert alert-success">
+    {{ successMessage }}
+</div>
+
+<form (ngSubmit) = "addRoom()">
+    <!-- <div class="form-group">
+        <input class="form-control" type="text" name="roomNumber">
+    </div> -->
     <div class="form-group">
-        <input class="form-control" type="text" name="roomType">
+        <input class="form-control" type="text" name="roomType" [(ngModel)]="room.roomType" placeholder="Room Type">
     </div>
     <div class="form-group">
-
+        <input class="form-control" type="text" name="amenities" [(ngModel)]="room.amenities" placeholder="Amenitites">
     </div>
     <div class="form-group">
-
+        <input class="form-control" type="number" name="price" [(ngModel)]="room.price"
+            placeholder="Room Price (per night)">
     </div>
     <div class="form-group">
-
+        <input class="form-control" type="text" name="photos" [(ngModel)]="room.photos" placeholder="Photos">
     </div>
     <div class="form-group">
-
+        <input class="form-control" type="datetime" name="checkinTime" [(ngModel)]="room.checkinTime"
+            placeholder="Check-in time">
     </div>
     <div class="form-group">
-
-    </div>
-    <div class="form-group">
-
+        <input class="form-control" type="datetime" name="checkoutTime" [(ngModel)]="room.checkoutTime"
+            placeholder="Check-out-time">
     </div>
     <div>
-
+        <button class="btn btn-primary" type="submit">Submit</button>
     </div>
 </form>

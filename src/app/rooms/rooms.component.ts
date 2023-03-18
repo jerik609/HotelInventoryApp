@@ -106,7 +106,7 @@ export class RoomsComponent implements OnDestroy, OnInit, DoCheck, AfterViewInit
       // but replace them with new ones, so that changes are picked up by change detection
       // i.e. this.roomList.push(room) would work data-wise, but not display wise
       next: (room) => {
-        console.log("Adding room: " + JSON.stringify(room));
+        console.log("Adding room: ", room);
         this.roomList = [...this.roomList, room];
       },
       error: (error) => console.log(error.message),
@@ -127,7 +127,7 @@ export class RoomsComponent implements OnDestroy, OnInit, DoCheck, AfterViewInit
 
     this.roomsService.updateRoom(newRoom).subscribe({
       next: (room) => {
-        console.log("Updated room: " + JSON.stringify(room));
+        console.log("Updated room: ", room);
         let filtered = this.roomList.filter(x => x.roomNumber !== room.roomNumber);
         this.roomList = [...filtered, room];
       },
