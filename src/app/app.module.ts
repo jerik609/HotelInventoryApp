@@ -23,6 +23,8 @@ import { MatListModule } from '@angular/material/list';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { BookingComponent } from './rooms/booking/booking.component';
 import { GetElemPipe } from './rooms/booking/GetElemPipe';
+import { RoomsAddComponent } from './rooms/rooms-add/rooms-add.component';
+import { FormsModule } from '@angular/forms';
 
 // https://angular.io/guide/ngmodules
 // I can have any number of modules in my application, but there always has to be only one root module
@@ -42,12 +44,14 @@ function initFactory(initService: InitService){
 @NgModule({ // annotation marking the class (AppModule) as module
   declarations: [ // any components, directives and pipes must be registered here
     AppComponent, RoomsComponent, RoomsListComponent, HeaderComponent, ContainerComponent, EmployeeComponent, AppNavComponent, NotfoundComponent, BookingComponent,
-    GetElemPipe
+    GetElemPipe,
+    RoomsAddComponent
   ],
   imports: [ // any module we intend to use, must be placed here (both external and those created by us)
     BrowserModule, // angular platform provided module, part of the browser library
     AppRoutingModule, BrowserAnimationsModule, // approuting module is created by us
     HttpClientModule, LayoutModule, MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule,
+    FormsModule
   ],
   providers: [
     {
