@@ -13,14 +13,18 @@
     {{ successMessage }}
 </div>
 
-<form #roomAddForm ="ngForm" (ngSubmit) = "addRoom()">
+<form #roomAddForm ="ngForm" (ngSubmit) = "addRoom(roomAddForm)">
     <!-- <div class="form-group">
         <input class="form-control" type="text" name="roomNumber">
     </div> -->
     <div class="form-group">
         <input 
             required
-            class="form-control" type="text" name="roomType" [(ngModel)]="room.roomType" placeholder="Room Type"
+            class="form-control" 
+            type="text" 
+            name="roomType" 
+            [(ngModel)]="room.roomType" 
+            placeholder="Room Type"
         />
     </div>
     <div class="form-group">
@@ -48,28 +52,36 @@
             class="form-control" type="number" name="price" [(ngModel)]="room.price"
             placeholder="Room Price (per night)"
         />
-        <div class="alert alert-danger" *ngIf="roomPrice.errors !== null"> 
+        <div class="alert alert-danger" *ngIf="roomPrice.dirty && roomPrice.errors !== null"> 
             {{ roomPrice.errors | json }} 
         </div>
     </div>
     <div class="form-group">
         <input 
             required
-            class="form-control" type="text" name="photos" [(ngModel)]="room.photos"
+            class="form-control" 
+            type="text" 
+            name="photos" 
+            [(ngModel)]="room.photos"
             placeholder="Photos"
         />
     </div>
     <div class="form-group">
         <input 
             required
-            class="form-control" type="datetime" name="checkinTime" [(ngModel)]="room.checkinTime"
+            class="form-control" 
+            type="datetime" name="checkinTime" 
+            [(ngModel)]="room.checkinTime"
             placeholder="Check-in time"
         />
     </div>
     <div class="form-group">
         <input 
             required
-            class="form-control" type="datetime" name="checkoutTime" [(ngModel)]="room.checkoutTime"
+            class="form-control" 
+            type="datetime" 
+            name="checkoutTime" 
+            [(ngModel)]="room.checkoutTime"
             placeholder="Check-out-time"
         />
     </div>

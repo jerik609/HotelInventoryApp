@@ -1,4 +1,6 @@
+import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Room } from '../rooms';
 import { RoomsService } from '../services/rooms.service';
 
@@ -25,9 +27,15 @@ export class RoomsAddComponent {
   constructor(private roomService: RoomsService) {
   }
 
-  addRoom() {
+  addRoom(form: NgForm) {
     this.roomService.addRoom(this.room).subscribe({
-      next: data => (this.successMessage = 'Room Added Successfully: ' + JSON.stringify(data))
+      next: data => {
+        (this.successMessage = 'Room Added Successfully: ' + JSON.stringify(data))
+        form.resetForm({
+          amenities: "Cookie Dispenser Machine (TM)",
+          price: "9999123"
+        });
+      }
     })
   }
 
