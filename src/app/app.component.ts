@@ -33,7 +33,9 @@ export class AppComponent implements AfterViewInit, OnInit {
   // accessing any tag - example
   @ViewChild("specialProperty", { static: true }) name!: ElementRef;
   ngOnInit(): void { // we can use onInit, because the reference is static
-    this.name.nativeElement.innerText = "Well, hello there!";
+    if (this.name !== undefined) {
+      this.name.nativeElement.innerText = "Well, hello there!";
+    }
   }
 
   constructor(@Inject(LocalStorageToken) private localStorage: Storage, private initService: InitService) {
