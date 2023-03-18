@@ -27,6 +27,7 @@ import { RoomsAddComponent } from './rooms/rooms-add/rooms-add.component';
 import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import { HoverDirective } from './hover.directive';
+import { EmailvalidatorDirective } from './emailvalidator/emailvalidator.directive';
 
 // https://angular.io/guide/ngmodules
 // I can have any number of modules in my application, but there always has to be only one root module
@@ -49,7 +50,8 @@ function initFactory(initService: InitService){
     GetElemPipe,
     RoomsAddComponent,
     LoginComponent,
-    HoverDirective
+    HoverDirective,
+    EmailvalidatorDirective
   ],
   imports: [ // any module we intend to use, must be placed here (both external and those created by us)
     BrowserModule, // angular platform provided module, part of the browser library
