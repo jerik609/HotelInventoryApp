@@ -1,6 +1,6 @@
 import { Component, Optional, Self, AfterViewInit } from '@angular/core';
-import { NotProvidedService } from '../rooms/services/not-provided.service';
-import { CommonsService } from '../commons.service';
+import { NotProvidedService } from '../common-services//not-provided.service';
+import { CommonsService } from '../common-services/commons.service';
 
 @Component({
   selector: 'app-employee',

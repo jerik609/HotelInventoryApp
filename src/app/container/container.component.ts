@@ -1,6 +1,6 @@
 import { AfterContentInit, Component, ContentChild, Host } from '@angular/core';
 import { EmployeeComponent } from '../employee/employee.component';
-import { CommonsService } from '../commons.service';
+import { CommonsService } from '../common-services/commons.service';
 
 @Component({
   selector: 'app-container',
