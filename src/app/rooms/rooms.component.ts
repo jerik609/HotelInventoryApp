@@ -4,6 +4,7 @@ import { HeaderComponent } from '../header/header.component';
 import { Room, Rooms } from './rooms';
 import { Observable, Subscription } from 'rxjs';
 import { HttpEventType, HttpHeaderResponse } from '@angular/common/http';
+import { ConfigService } from '../common-services/config.service';
 
 @Component({
   selector: 'app-rooms',
@@ -44,7 +45,10 @@ export class RoomsComponent implements OnDestroy, OnInit, DoCheck, AfterViewInit
   constructor. The constructor should only be used to initialize class members but shouldn't do
   actual "work".
   */
-  constructor(private roomsService: RoomsService) {
+  constructor(private roomsService: RoomsService,
+    private config: ConfigService
+    ) {
+      console.log("The title: ", config.getTitle());
   }
 
   ngOnInit(): void {

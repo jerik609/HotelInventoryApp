@@ -2,6 +2,7 @@ import { AfterViewInit, Component, ElementRef, Inject, OnInit, ViewChild, ViewCo
 import { LocalStorageToken } from './localstorage.token'
 import { InitService } from './init.service';
 import { HeaderComponent } from './header/header.component';
+import { ConfigService } from './common-services/config.service'
 
 @Component({
   selector: 'app-root', // "name" of the component - this is the name we will use to refer to this component in the html file (index.html)
@@ -38,9 +39,12 @@ export class AppComponent implements AfterViewInit, OnInit {
     }
   }
 
-  constructor(@Inject(LocalStorageToken) private localStorage: Storage, private initService: InitService) {
+  constructor(@Inject(LocalStorageToken) private localStorage: Storage, 
+  private initService: InitService,
+  private config: ConfigService) {
     console.log('Our configuration!: ', initService.getConfig())
     localStorage.setItem("helloThing", "the hello thing which says: hello there my friend!")
+    console.log("The title: ", config.getTitle());
   }
 
 }
