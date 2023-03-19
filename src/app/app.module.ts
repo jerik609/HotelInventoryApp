@@ -4,10 +4,8 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { RoomsComponent } from './rooms/rooms.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RoomsListComponent } from './rooms/rooms-list/rooms-list.component';
-import { HeaderComponent } from './rooms/header/header.component';
+import { HeaderComponent } from './header/header.component';
 import { ContainerComponent } from './container/container.component';
 import { EmployeeComponent } from './employee/employee.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -21,13 +19,14 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { NotfoundComponent } from './notfound/notfound.component';
-import { BookingComponent } from './rooms/booking/booking.component';
-import { GetElemPipe } from './rooms/booking/GetElemPipe';
-import { RoomsAddComponent } from './rooms/rooms-add/rooms-add.component';
-import { FormsModule } from '@angular/forms';
+import { GetElemPipe } from './custompipes/GetElemPipe';
 import { LoginComponent } from './login/login.component';
 import { HoverDirective } from './hover.directive';
 import { EmailvalidatorDirective } from './emailvalidator/emailvalidator.directive';
+import { RoomsModule } from './rooms/rooms.module';
+import { HeaderModule } from './header/header.module';
+import { CustompipesModule } from './custompipes/custompipes.module';
+import { FormsModule } from '@angular/forms';
 
 // https://angular.io/guide/ngmodules
 // I can have any number of modules in my application, but there always has to be only one root module
@@ -46,18 +45,30 @@ function initFactory(initService: InitService){
 
 @NgModule({ // annotation marking the class (AppModule) as module
   declarations: [ // any components, directives and pipes must be registered here
-    AppComponent, RoomsComponent, RoomsListComponent, HeaderComponent, ContainerComponent, EmployeeComponent, AppNavComponent, NotfoundComponent, BookingComponent,
-    GetElemPipe,
-    RoomsAddComponent,
+    AppComponent, 
+    ContainerComponent, 
+    EmployeeComponent, 
+    AppNavComponent, 
+    NotfoundComponent, 
     LoginComponent,
     HoverDirective,
     EmailvalidatorDirective
   ],
   imports: [ // any module we intend to use, must be placed here (both external and those created by us)
     BrowserModule, // angular platform provided module, part of the browser library
-    AppRoutingModule, BrowserAnimationsModule, // approuting module is created by us
-    HttpClientModule, LayoutModule, MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule,
-    FormsModule
+    AppRoutingModule, // approuting module is created by us
+    BrowserAnimationsModule, 
+    HttpClientModule, 
+    LayoutModule, 
+    MatToolbarModule, 
+    MatButtonModule, 
+    MatSidenavModule, 
+    MatIconModule, 
+    MatListModule,
+    FormsModule,
+    RoomsModule,
+    HeaderModule,
+    CustompipesModule
   ],
   providers: [
     {

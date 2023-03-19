@@ -1,7 +1,7 @@
 import { Component, Pipe } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { map, Observable } from 'rxjs';
-import { GetElemPipe } from './GetElemPipe';
+import { GetElemPipe } from '../../custompipes/GetElemPipe';
 
 @Component({
   selector: 'app-booking',

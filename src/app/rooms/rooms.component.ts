@@ -1,6 +1,6 @@
 import { RoomsService } from './services/rooms.service';
 import { AfterViewChecked, AfterViewInit, ChangeDetectionStrategy, Component, DoCheck, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
-import { HeaderComponent } from './header/header.component';
+import { HeaderComponent } from '../header/header.component';
 import { Room, Rooms } from './rooms';
 import { Observable, Subscription } from 'rxjs';
 import { HttpEventType, HttpHeaderResponse } from '@angular/common/http';
