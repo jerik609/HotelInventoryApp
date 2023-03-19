@@ -1,18 +1,18 @@
-import { RoomsService } from './../rooms/services/rooms.service';
 import { AfterContentInit, Component, ContentChild, Host } from '@angular/core';
 import { EmployeeComponent } from '../employee/employee.component';
+import { CommonsService } from '../commons.service';
 
 @Component({
   selector: 'app-container',
   templateUrl: './container.component.html',
-  styleUrls: ['./container.component.scss'] //,
-  //providers: [RoomsService]
+  styleUrls: ['./container.component.scss'], //,
+  providers: [CommonsService]
 })
 export class ContainerComponent implements AfterContentInit {
 
   @ContentChild(EmployeeComponent) employeeComponent!: EmployeeComponent;
 
-  constructor() { //@Host() private roomsService: RoomsService) {
+  constructor(@Host() private commonsService: CommonsService) {
   }
 
   ngAfterContentInit(): void {

@@ -56,7 +56,7 @@ function initFactory(initService: InitService){
   ],
   imports: [ // any module we intend to use, must be placed here (both external and those created by us)
     BrowserModule, // angular platform provided module, part of the browser library
-    RoomsModule,
+    //RoomsModule,
     AppRoutingModule, // approuting module is created by us
     BrowserAnimationsModule, 
     HttpClientModule, 

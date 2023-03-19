@@ -1,19 +1,19 @@
-import { RoomsService } from './../rooms/services/rooms.service';
 import { Component, Optional, Self, AfterViewInit } from '@angular/core';
 import { NotProvidedService } from '../rooms/services/not-provided.service';
+import { CommonsService } from '../commons.service';
 
 @Component({
   selector: 'app-employee',
   templateUrl: './employee.component.html',
   styleUrls: ['./employee.component.scss'],
-  providers: [RoomsService]
+  providers: [CommonsService]
 })
 export class EmployeeComponent implements AfterViewInit {
 
   employeeName: string = "John";
 
   constructor(
-    @Self() private roomsService: RoomsService,
+    @Self() private roomsService: CommonsService,
     @Optional() private notProvided: NotProvidedService
   ) {
   }

@@ -8,6 +8,9 @@ import { NotfoundComponent } from './notfound/notfound.component';
 const routes: Routes = [
   { path:'employee', component: EmployeeComponent },
   { path:'login', component: LoginComponent },
+  { path:'rooms', loadChildren: () => 
+    import('./rooms/rooms.module').then((module) => module.RoomsModule)
+  },
   { path:'', redirectTo:'/login', pathMatch: 'full'},
   { path:'**', component: NotfoundComponent }
 ];
