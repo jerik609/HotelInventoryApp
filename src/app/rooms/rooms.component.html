@@ -62,3 +62,5 @@
     *ngIf="!hideRoomList && (getRooms$ | async) as theRoomz">
     <app-rooms-list [rooms]="theRoomz" [title]="title" (clickedRoom)="selectRoom($event)"></app-rooms-list>
 </div>
+
+<router-outlet></router-outlet>
