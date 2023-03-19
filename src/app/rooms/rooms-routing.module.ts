@@ -8,9 +8,13 @@ const routes: Routes = [
   { 
     path:'rooms',
     component: RoomsComponent,
-    children: [{ path:':roomid', component: BookingComponent }]
+    children: [
+      { path:'add', component: RoomsAddComponent },
+      // this matches anything, so it has to be below the more specific cases
+      { path:':roomid', component: BookingComponent }
+    ]
   },
-  { path:'rooms/add', component: RoomsAddComponent }
+  
 ];
 
 @NgModule({

@@ -90,29 +90,29 @@ export class RoomsComponent implements OnDestroy, OnInit, DoCheck, AfterViewInit
     }
   }
 
-  addRoom(): void {
-    const newRoom: Room = {
-      //number: `${this.roomList.length + 1}`,
-      roomType: 'Standard Room',
-      amenities: ['Chocolate Fountain', 'Free Beer'],
-      photos: ['photos/1.jpg', 'photos/2.jpg', 'photos/3'],
-      price: 1500,
-      checkinTime: new Date('11-November-2021'),
-      checkoutTime: new Date('11-November-2021')
-    };
+  // addRoom(): void {
+  //   const newRoom: Room = {
+  //     //number: `${this.roomList.length + 1}`,
+  //     roomType: 'Standard Room',
+  //     amenities: ['Chocolate Fountain', 'Free Beer'],
+  //     photos: ['photos/1.jpg', 'photos/2.jpg', 'photos/3'],
+  //     price: 1500,
+  //     checkinTime: new Date('11-November-2021'),
+  //     checkoutTime: new Date('11-November-2021')
+  //   };
 
-    this.roomsService.addRoom(newRoom).subscribe({
-      // due to making sure OnPush mode can function, we should not update existing references,
-      // but replace them with new ones, so that changes are picked up by change detection
-      // i.e. this.roomList.push(room) would work data-wise, but not display wise
-      next: (room) => {
-        console.log("Adding room: ", room);
-        this.roomList = [...this.roomList, room];
-      },
-      error: (error) => console.log(error.message),
-      complete: () => console.log("done reading the rooms list!")
-    })
-  }
+  //   this.roomsService.addRoom(newRoom).subscribe({
+  //     // due to making sure OnPush mode can function, we should not update existing references,
+  //     // but replace them with new ones, so that changes are picked up by change detection
+  //     // i.e. this.roomList.push(room) would work data-wise, but not display wise
+  //     next: (room) => {
+  //       console.log("Adding room: ", room);
+  //       this.roomList = [...this.roomList, room];
+  //     },
+  //     error: (error) => console.log(error.message),
+  //     complete: () => console.log("done reading the rooms list!")
+  //   })
+  // }
 
   editRoom(): void {
     const newRoom: Room = {
