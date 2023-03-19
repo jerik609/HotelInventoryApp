@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ElementRef, Inject, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
-import { RoomsComponent } from './rooms/rooms.component';
 import { LocalStorageToken } from './localstorage.token'
 import { InitService } from './init.service';
+import { HeaderComponent } from './header/header.component';
 
 @Component({
   selector: 'app-root', // "name" of the component - this is the name we will use to refer to this component in the html file (index.html)
@@ -24,9 +24,9 @@ export class AppComponent implements AfterViewInit, OnInit {
   @ViewChild("myProperty", { read: ViewContainerRef }) ref?: ViewContainerRef;
 
   ngAfterViewInit(): void {
-    let component = this.ref?.createComponent(RoomsComponent);
+    let component = this.ref?.createComponent(HeaderComponent);
     if (component !== undefined) {
-      component!.instance.hotelName = "No-Tell Motel";
+      component!.instance.title = "No-Tell Motel";
     }
   }
 

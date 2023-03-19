@@ -13,7 +13,7 @@ export class EmployeeComponent implements AfterViewInit {
   employeeName: string = "John";
 
   constructor(
-    @Self() private roomsService: CommonsService,
+    @Self() private commonsService: CommonsService,
     @Optional() private notProvided: NotProvidedService
   ) {
   }
