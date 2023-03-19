@@ -9,13 +9,15 @@ import { RoomsAddComponent } from './rooms-add/rooms-add.component';
 import { FormsModule } from '@angular/forms';
 import { HeaderModule } from '../header/header.module';
 import { CustompipesModule } from '../custompipes/custompipes.module';
+import { BannerComponent } from './banner/banner.component';
 
 @NgModule({
   declarations: [
     RoomsComponent,
     RoomsListComponent,
     BookingComponent,
-    RoomsAddComponent
+    RoomsAddComponent,
+    BannerComponent
   ],
   imports: [
     CommonModule,
