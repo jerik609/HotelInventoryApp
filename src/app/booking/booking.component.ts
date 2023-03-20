@@ -11,6 +11,9 @@ export class BookingComponent implements OnInit {
   bookingForm!: FormGroup;
   
   constructor(private formBuilder: FormBuilder) {
+  }
+
+  ngOnInit(): void {
     this.bookingForm = this.formBuilder.group({
       roomId: [''],
       guestEmail: [''],
@@ -29,10 +32,6 @@ export class BookingComponent implements OnInit {
       guestCount: new FormControl(''),
       //guestList: Guest[];
     })
-  }
-
-  ngOnInit(): void {
-    throw new Error('Method not implemented.');
   }
 
 }
