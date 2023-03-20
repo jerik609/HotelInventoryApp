@@ -15,7 +15,7 @@ export class BookingComponent implements OnInit {
 
   ngOnInit(): void {
     this.bookingForm = this.formBuilder.group({
-      roomId: [''],
+      roomId: new FormControl({ value: '2', disabled: true}), //[''],
       guestEmail: [''],
       checkinDate: [''],
       checkoutDate: [''],
@@ -35,7 +35,7 @@ export class BookingComponent implements OnInit {
   }
 
   addBooking() { 
-    console.log("The submitted form", this.bookingForm.value);
+    console.log("The submitted form", this.bookingForm.getRawValue());
   }
 
 }
