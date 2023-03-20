@@ -42,7 +42,7 @@ const routes: Routes = [
   { 
     path: 'booking', 
     loadChildren: () => import('./booking/booking.module').then(m => m.BookingModule),
-    canActivate: [canActivateGuard]
+    //canActivate: [canActivateGuard]
   },
   { path:'**', component: NotfoundComponent }
 ];
