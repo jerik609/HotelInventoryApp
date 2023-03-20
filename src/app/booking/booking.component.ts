@@ -34,4 +34,8 @@ export class BookingComponent implements OnInit {
     })
   }
 
+  addBooking() { 
+    console.log("The submitted form", this.bookingForm.value);
+  }
+
 }
