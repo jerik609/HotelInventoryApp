@@ -10,10 +10,17 @@ export class BookingComponent implements OnInit {
   
   bookingForm!: FormGroup;
   
+  bookingForm2!: FormGroup;
+
   constructor(private formBuilder: FormBuilder) {
   }
 
   ngOnInit(): void {
+
+    this.bookingForm2 = this.formBuilder.group({
+      dadaEmail: [''],
+    })
+
     this.bookingForm = this.formBuilder.group({
       roomId: new FormControl({ value: '2', disabled: true}), //[''],
       guestEmail: [''],
@@ -24,12 +31,15 @@ export class BookingComponent implements OnInit {
       bookingDate: [''],
       mobileNumber: [''],
       guestName: [''],
-      guestAddress: [''],
-      guestCity: [''],
-      guestState: [''],
-      guestCountry: [''],
-      guestZipCode: new FormControl(''),
-      guestCount: new FormControl(''),
+      address: this.formBuilder.group({
+        addressLine: [''],
+        addressLine2: [''],
+        city: [''],
+        state: [''],
+        country: [''],
+        //zipCode: new FormControl({ value: '2', disabled: true })
+      }),
+      guestCount: new FormControl('')
       //guestList: Guest[];
     })
   }

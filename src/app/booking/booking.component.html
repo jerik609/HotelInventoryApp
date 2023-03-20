@@ -1,10 +1,29 @@
 <h1>Welcome to Booking!</h1>
+
+<!-- <p>{{ bookingForm2.value | json }}</p>
+<p>{{ bookingForm2.pristine | json }}</p>
+<p>{{ bookingForm2.dirty | json }}</p>
+
+<form class="example-form" [formGroup]="bookingForm2">
+    <mat-form-field class="example-full-width">
+        <input 
+            type="text" 
+            matInput 
+            formControlName="dadaEmail"
+            placeholder="dadaEmail"
+        >
+    </mat-form-field>
+</form> -->
+
+<!-- <br>
+<p>============ SEPARATOR =============</p>
+<br> -->
+
 <p>{{ bookingForm.value | json }}</p>
 <p>{{ bookingForm.pristine | json }}</p>
 <p>{{ bookingForm.dirty | json }}</p>
 
 <form class="example-form" [formGroup]="bookingForm" (ngSubmit)="addBooking()">
-    
     
     <mat-form-field class="example-full-width">
         <input 
@@ -134,6 +153,64 @@
             placeholder="Guest count"
         >
     </mat-form-field> -->
+
+    <div formGroupName="address">
+        <mat-accordion class="example-headers-align" multi>
+            
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>Address</mat-panel-title>
+                </mat-expansion-panel-header>
+          
+                <mat-form-field class="example-full-width">
+                    <input 
+                        type="text" 
+                        matInput 
+                        formControlName="addressLine"
+                        placeholder="Addres line"
+                    >
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width">
+                    <input 
+                        type="text" 
+                        matInput 
+                        formControlName="addressLine2"
+                        placeholder="Address line 2"
+                    >
+                </mat-form-field>
+           
+                <mat-form-field class="example-full-width">
+                    <input 
+                        type="text" 
+                        matInput 
+                        formControlName="city"
+                        placeholder="City"
+                    >
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width">
+                    <input 
+                        type="text" 
+                        matInput 
+                        formControlName="state"
+                        placeholder="State"
+                    >
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width">
+                    <input 
+                        type="text" 
+                        matInput 
+                        formControlName="country"
+                        placeholder="Country"
+                    >
+                </mat-form-field>
+
+            </mat-expansion-panel>
+            
+          </mat-accordion>
+    </div>
 
     <button mat-raised-button color="primary" type="submit">Book Room</button>
 </form>
