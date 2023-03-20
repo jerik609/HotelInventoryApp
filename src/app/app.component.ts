@@ -3,6 +3,8 @@ import { LocalStorageToken } from './localstorage.token'
 import { InitService } from './init.service';
 import { HeaderComponent } from './header/header.component';
 import { ConfigService } from './common-services/config.service'
+import { NavigationEnd, NavigationStart, Router } from '@angular/router';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-root', // "name" of the component - this is the name we will use to refer to this component in the html file (index.html)
@@ -33,18 +35,40 @@ export class AppComponent implements AfterViewInit, OnInit {
 
   // accessing any tag - example
   @ViewChild("specialProperty", { static: true }) name!: ElementRef;
+
+  constructor(
+      @Inject(LocalStorageToken) private localStorage: Storage, 
+      private initService: InitService,
+      private config: ConfigService,
+      private router: Router) {
+    console.log('Our configuration!: ', initService.getConfig())
+    localStorage.setItem("helloThing", "the hello thing which says: hello there my friend!")
+    console.log("The title: ", config.getTitle());
+  }
+
+  routerEvent$ = this.router.events;
+
   ngOnInit(): void { // we can use onInit, because the reference is static
     if (this.name !== undefined) {
       this.name.nativeElement.innerText = "Well, hello there!";
     }
-  }
 
-  constructor(@Inject(LocalStorageToken) private localStorage: Storage, 
-  private initService: InitService,
-  private config: ConfigService) {
-    console.log('Our configuration!: ', initService.getConfig())
-    localStorage.setItem("helloThing", "the hello thing which says: hello there my friend!")
-    console.log("The title: ", config.getTitle());
+    this.routerEvent$.pipe(
+      filter((event) => event instanceof NavigationStart)
+    ).subscribe({
+      next: event => console.log("Navigation started: ", event)
+    });
+
+    this.routerEvent$.pipe(
+      filter((event) => event instanceof NavigationEnd)
+    ).subscribe({
+      next: event => console.log("Navigation completed: ", event)
+    });
+
+    this.routerEvent$.subscribe({
+      next: event => console.log("Routing Event: ", event)
+    });
+
   }
 
 }
