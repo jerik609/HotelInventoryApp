@@ -1,5 +1,5 @@
 import { inject, NgModule } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivateFn, CanMatchFn, Route, Router, RouterModule, RouterStateSnapshot, Routes, UrlSegment } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivateFn, CanLoad, CanMatchFn, Route, Router, RouterModule, RouterStateSnapshot, Routes, UrlSegment } from '@angular/router';
 import { EmployeeComponent } from './employee/employee.component';
 import { LoginComponent } from './login/login.component';
 import { LoginService } from './login/login.service';
@@ -11,10 +11,16 @@ const canActivateGuard: CanActivateFn =
     let loginService = inject<LoginService>(LoginService);
     let router = inject<Router>(Router);
     return loginService.isLoggedIn ? true : router.navigate(['/login']);
-  }
+  };
 
-const canMatchGuard:  CanMatchFn = 
-  (route: Route, segments: UrlSegment[]) => true;
+// allows only logged-in users to pull resources from server
+const canMatch: CanMatchFn = 
+  (route: Route, segments: UrlSegment[]) => {
+    let loginService = inject<LoginService>(LoginService);
+    let router = inject<Router>(Router);
+    console.log("CAN I MATCH? -> ", loginService.isLoggedIn)
+    return loginService.isLoggedIn ? true : router.navigate(['/login']);
+  };
 
 // order matters!
 const routes: Routes = [
@@ -28,6 +34,8 @@ const routes: Routes = [
     path:'rooms', 
     loadChildren: () => 
       import('./rooms/rooms.module').then((module) => module.RoomsModule),
+    // again, ordering is important!
+    canMatch: [canMatch],
     canActivate: [canActivateGuard]
   },
   { path:'', redirectTo:'/login', pathMatch: 'full'}, // no guard here :-) would not make sense
