@@ -1,5 +1,5 @@
 import { inject, NgModule } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivateFn, CanMatchFn, Route, RouterModule, RouterStateSnapshot, Routes, UrlSegment } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivateFn, CanMatchFn, Route, Router, RouterModule, RouterStateSnapshot, Routes, UrlSegment } from '@angular/router';
 import { EmployeeComponent } from './employee/employee.component';
 import { LoginComponent } from './login/login.component';
 import { LoginService } from './login/login.service';
@@ -7,8 +7,10 @@ import { NotfoundComponent } from './notfound/notfound.component';
 
 const canActivateGuard: CanActivateFn = 
   (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
-    console.log("THE ACTIVATE GUARD RESOLVES!")
-    return inject<LoginService>(LoginService).isLoggedIn;
+    console.log("THE ACTIVATE GUARD RESOLVES!");
+    let loginService = inject<LoginService>(LoginService);
+    let router = inject<Router>(Router);
+    return loginService.isLoggedIn ? true : router.navigate(['/login']);
   }
 
 const canMatchGuard:  CanMatchFn = 
