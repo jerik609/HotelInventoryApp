@@ -165,6 +165,7 @@
                     >
                 </mat-form-field>
            
+                <mat-error *ngIf="bookingForm.get('address.city')?.invalid">{{ bookingForm.get('address.city')?.errors | json }}</mat-error>
                 <mat-form-field class="example-full-width">
                     <input 
                         type="text" 

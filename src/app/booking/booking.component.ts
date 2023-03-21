@@ -35,7 +35,7 @@ export class BookingComponent implements OnInit {
       address: this.formBuilder.group({
         addressLine: [''],
         addressLine2: [''],
-        city: [''],
+        city: ['', [Validators.required]],
         state: [''],
         country: [''],
       }),
