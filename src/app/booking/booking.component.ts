@@ -24,13 +24,24 @@ export class BookingComponent implements OnInit {
     this.bookingForm = this.formBuilder.group({
       termsAndConditions: new FormControl(false, { validators: Validators.requiredTrue }), //[false, [Validators.requiredTrue]],
       roomId: new FormControl({ value: '2', disabled: true}, { validators: [Validators.required]}), //[''],
-      guestEmail: ['', [Validators.required, Validators.email]],
+      guestEmail: [
+        '', 
+        { 
+          updateOn:'blur', 
+          validators: [Validators.required, Validators.minLength(5)]
+        }
+      ],
       checkinDate: [''],
       checkoutDate: [''],
       bookingStatus: [''],
       bookingAmount: [''],
       bookingDate: [''],
-      mobileNumber: ['', [Validators.required, Validators.minLength(5)]],
+      mobileNumber: [
+        '', 
+        { 
+          updateOn:'blur'
+        }
+      ],
       guestName: [''],
       address: this.formBuilder.group({
         addressLine: [''],
@@ -42,9 +53,14 @@ export class BookingComponent implements OnInit {
       guests: this.formBuilder.array([
         this.getNewGuestGroup()
       ])
-    })
+    }, { updateOn: 'blur' })
 
     this.getBookingData();
+
+    this.bookingForm.valueChanges.subscribe({
+      next: change => console.log("Registered form value change: ", change)
+    })
+
   }
 
   get guests() {
