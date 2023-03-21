@@ -13,11 +13,11 @@ export class LoginService {
 
   login(email: string, password: string): void {
     if (email === "frodo@shire.com" && password === "a") {
-      alert(`Hello ${email}, you're NOT an admin`);
+      //alert(`Hello ${email}, you're NOT an admin`);
       this.isLoggedIn = true;
       this.isAdmin = false;
     } else if (email === "gandalf@shire.com" && password === "a") {
-      alert(`Hello ${email}, you're and ADMIN!`);
+      //alert(`Hello ${email}, you're and ADMIN!`);
       this.isLoggedIn = true;
       this.isAdmin = true;
     }

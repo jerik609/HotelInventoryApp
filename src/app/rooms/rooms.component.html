@@ -1,17 +1,18 @@
 <!-- this is an angular template -->
 
 <!-- interpolation of an attribute -->
-<h1>Welcome to {{hotelName}}!</h1>
+<!-- <h1>Welcome to {{hotelName}}!</h1> -->
 
-<div>-- header header header --</div>
+<!-- <div>-- header header header --</div>
 
 <app-header></app-header>
 <app-header></app-header>
-<app-header></app-header>
+<app-header></app-header> -->
 
-<div>-- header header header --</div>
+<!-- <div>-- header header header --</div> -->
 
-<p>Displaying a class attribute via interpolation: {{ boo.hoo }}</p> <!-- interpolation of a class member -->
+<!-- interpolation of a class member -->
+<!-- <p>Displaying a class attribute via interpolation: {{ boo.hoo }}</p>  -->
 
 <div [hidden]="hideRooms">
     Number of rooms:
@@ -34,29 +35,29 @@
 
 <!-- <div *ngIf="rooms && rooms.availableRooms && rooms.availableRooms > 0"> <!-- example of *ngIf --> <!-- let's do some inspection -->
 
-<div *ngIf="selectedRoom != undefined">
+<!-- <div *ngIf="selectedRoom != undefined">
     {{ selectedRoom | json }}
-</div>
+</div> -->
 
 <div>
     <!-- <button (click)="addRoom()">Add Room</button> -->
     <button routerLink="add">Add Room</button>
 </div>
 
-<div>
+<!-- <div>
     <button (click)="toggleRoomList()">Toggle Rooms</button>
-</div>
+</div> -->
 
-<button (click)="editRoom()">Edit Room</button>
+<!-- <button (click)="editRoom()">Edit Room</button> -->
 
-<button (click)="getPhotos()">Get Photos</button>
+<!-- <button (click)="getPhotos()">Get Photos</button> -->
 
-<h1> {{ totalBytes }} loaded </h1>
+<!-- <h1> {{ totalBytes }} loaded </h1> -->
 
 <!-- *ngIf="!hideRoomList && (rooms?.availableRooms ?? 0) > 0" -->
 
-<h3>Errors: {{ getErrors$ | async }}</h3>
-<h3>Room count: {{ getRoomCount$ | async }} </h3>
+<!-- <h3>Errors: {{ getErrors$ | async }}</h3>
+<h3>Room count: {{ getRoomCount$ | async }} </h3> -->
 
 <!-- example of [ngStyle] and *ngIf -->
 <div [ngStyle]="{ 'font-weight': 'bold', 'color' : (rooms?.availableRooms ?? 0) > 5 ? 'green' : 'red' }"
