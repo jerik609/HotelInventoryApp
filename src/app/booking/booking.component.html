@@ -216,7 +216,10 @@
                     </mat-expansion-panel-header>
     
                     <div [formGroupName]="i">
-                        <mat-error *ngIf="guests.at(i).get('name')?.invalid">{{ guests.at(i).get('name')?.errors | json }}</mat-error>
+                        <!-- <mat-error *ngIf="guests.at(i).get('name')?.invalid">{{ guests.at(i).get('name')?.errors | json }}</mat-error> -->
+                        <mat-error *ngIf="bookingForm.get(['guests', i, 'name'])?.hasError('required')">
+                            Guest name is <strong>required</strong>!
+                        </mat-error>
                         <mat-form-field>
                             <input
                                 type="text"
