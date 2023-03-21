@@ -43,6 +43,8 @@ export class BookingComponent implements OnInit {
         this.getNewGuestGroup()
       ])
     })
+
+    this.getBookingData();
   }
 
   get guests() {
@@ -91,8 +93,35 @@ export class BookingComponent implements OnInit {
         city: "testcity"
       },
       termsAndConditions: false
-  })
+    })
+  }
 
+  // mocking function to test setValue and patchValue, "as if the data were comming from some backend"
+  getBookingData() {
+    this.bookingForm.patchValue({//setValue({
+      termsAndConditions: new FormControl(false, { validators: Validators.requiredTrue }), //[false, [Validators.requiredTrue]],
+      roomId: '2',
+      guestEmail: 'test@gmail.com',
+      checkinDate: new Date('10-Feb-2020'),
+      checkoutDate: new Date('10-Feb-2020'),
+      bookingStatus: [''],
+      bookingAmount: [''],
+      bookingDate: [''],
+      mobileNumber: ['', [Validators.required, Validators.minLength(5)]],
+      guestName: [''],
+      address: {
+        addressLine: "hello",
+        addressLine2: "you",
+        city: "some place",
+        state: "state",
+        country: "country"
+      },
+      guests: [{
+        //name: "me",
+        email: "h@h.h",
+        age: 10
+      }]
+    })
   }
 
 }
