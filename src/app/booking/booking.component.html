@@ -28,8 +28,25 @@
 
 <hr>
 
+<div>
+    <button mat-raised-button color="primary" type="button" (click)="togglePassport()">Toggle Passport</button>
+</div>
+
 <form class="example-form" [formGroup]="bookingForm" (ngSubmit)="addBooking()">
     <h1>Room</h1>
+
+    <div *ngIf="bookingForm.get('passport')">
+        <mat-form-field class="example-full-width">
+            <mat-label>Passport</mat-label>
+            <input 
+                type="text" 
+                matInput 
+                formControlName="passport"
+                placeholder="Passport Number"
+            >
+        </mat-form-field>
+    </div>
+
     <mat-form-field class="example-full-width">
         <input 
             type="text" 

@@ -63,6 +63,17 @@ export class BookingComponent implements OnInit {
     }))
   }
 
+  #hasPassport: boolean = false;
+  togglePassport() {
+    if (this.#hasPassport) {
+      this.bookingForm.removeControl('passport');
+      this.#hasPassport = false;
+    } else {
+      this.bookingForm.addControl('passport', new FormControl(''));
+      this.#hasPassport = true;
+    }
+  }
+
   addBooking() { 
     console.log("The submitted form", this.bookingForm.getRawValue());
     console.log(this.bookingForm.get('address')?.getRawValue().addressLine)
