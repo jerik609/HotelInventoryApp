@@ -96,63 +96,6 @@
             placeholder="Mobile number"
         >
     </mat-form-field>
-    <!-- this can be a separate form -->
-    <!-- <mat-form-field class="example-full-width">
-        <input 
-            type="text" 
-            matInput 
-            formControlName="guestName"
-            placeholder="Guest name"
-        >
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-        <input 
-            type="text" 
-            matInput 
-            formControlName="guestAddress"
-            placeholder="Guest address"
-        >
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-        <input 
-            type="text" 
-            matInput 
-            formControlName="guestCity"
-            placeholder="Guest city"
-        >
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-        <input 
-            type="text" 
-            matInput 
-            formControlName="guestState"
-            placeholder="Guest state"
-        >
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-        <input 
-            type="text" 
-            matInput 
-            formControlName="guestCountry"
-            placeholder="Guest country"
-        >
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-        <input 
-            type="text" 
-            matInput 
-            formControlName="guestZipCode"
-            placeholder="Guest ZIP code"
-        >
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-        <input 
-            type="number" 
-            matInput 
-            formControlName="guestCount"
-            placeholder="Guest count"
-        >
-    </mat-form-field> -->
 
     <div formGroupName="address">
         <mat-accordion class="example-headers-align" multi>
@@ -210,6 +153,42 @@
             </mat-expansion-panel>
             
           </mat-accordion>
+    </div>
+
+    <!-- guest array -->
+    <!-- https://stackoverflow.com/questions/57271347/how-to-make-a-dynamic-form-in-angular-with-an-ngfor -->
+    <div>
+        <button mat-raised-button color="primary" type="button" (click)="addGuest()">Add Guest</button>
+    </div>
+    <div formArrayName="guests">
+        <div *ngFor="let guest of guests.controls; let i=index">
+            <div [formGroupName]="i">
+                <mat-form-field>
+                    <input
+                        type="text"
+                        matInput
+                        formControlName="name"
+                        placeholder="Guest Name"
+                    >
+                </mat-form-field>
+                <mat-form-field>
+                    <input
+                        type="email"
+                        matInput
+                        formControlName="email"
+                        placeholder="Provide and Email"
+                    >
+                </mat-form-field>
+                <mat-form-field>
+                    <input
+                        type="number"
+                        matInput
+                        formControlName="age"
+                        placeholder="Guest Age"
+                    >
+                </mat-form-field>
+            </div>
+        </div>
     </div>
 
     <button mat-raised-button color="primary" type="submit">Book Room</button>

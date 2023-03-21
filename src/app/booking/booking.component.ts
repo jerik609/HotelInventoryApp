@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-booking',
@@ -37,11 +37,30 @@ export class BookingComponent implements OnInit {
         city: [''],
         state: [''],
         country: [''],
-        //zipCode: new FormControl({ value: '2', disabled: true })
       }),
-      guestCount: new FormControl('')
-      //guestList: Guest[];
+      guests: this.formBuilder.array([
+        this.formBuilder.group({
+          name: new FormControl(''),
+          email: [''],
+          age: ['']
+        })
+      ])
     })
+  }
+
+  get guests() {
+    return this.bookingForm.get('guests') as FormArray;
+  }
+
+  addGuest() {
+    console.log("Adding a guest");
+    //let guests = this.bookingForm.get('guests') as FormArray;
+    this.guests.push(
+      this.formBuilder.group({
+        name: new FormControl(''),
+        email: [''],
+        age: ['']
+    }))
   }
 
   addBooking() { 
