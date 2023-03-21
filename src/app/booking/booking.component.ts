@@ -81,6 +81,18 @@ export class BookingComponent implements OnInit {
   addBooking() { 
     console.log("The submitted form", this.bookingForm.getRawValue());
     console.log(this.bookingForm.get('address')?.getRawValue().addressLine)
+    this.bookingForm.reset({
+      roomId: '2',
+      guestEmail: 'blah@blahblah.sk',
+      guests: [{
+        name: "moo"
+      }],
+      address: {
+        city: "testcity"
+      },
+      termsAndConditions: false
+  })
+
   }
 
 }
