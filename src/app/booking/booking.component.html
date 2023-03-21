@@ -1,5 +1,7 @@
 <h1>Welcome to Booking!</h1>
 
+<hr>
+
 <!-- <p>{{ bookingForm2.value | json }}</p>
 <p>{{ bookingForm2.pristine | json }}</p>
 <p>{{ bookingForm2.dirty | json }}</p>
@@ -19,12 +21,15 @@
 <p>============ SEPARATOR =============</p>
 <br> -->
 
-<p>{{ bookingForm.value | json }}</p>
-<p>{{ bookingForm.pristine | json }}</p>
-<p>{{ bookingForm.dirty | json }}</p>
+<h3> debug info </h3>
+<p>Form: {{ bookingForm.value | json }}</p>
+<p>Pristine: {{ bookingForm.pristine | json }}</p>
+<p>Dirty: {{ bookingForm.dirty | json }}</p>
+
+<hr>
 
 <form class="example-form" [formGroup]="bookingForm" (ngSubmit)="addBooking()">
-    
+    <h1>Room</h1>
     <mat-form-field class="example-full-width">
         <input 
             type="text" 
@@ -157,39 +162,53 @@
 
     <!-- guest array -->
     <!-- https://stackoverflow.com/questions/57271347/how-to-make-a-dynamic-form-in-angular-with-an-ngfor -->
-    <div>
-        <button mat-raised-button color="primary" type="button" (click)="addGuest()">Add Guest</button>
-    </div>
+
     <div formArrayName="guests">
+        <h1> Guests </h1>
+        <div>
+            <button mat-raised-button color="primary" type="button" (click)="addGuest()">Add Guest</button>
+        </div>
         <div *ngFor="let guest of guests.controls; let i=index">
-            <div [formGroupName]="i">
-                <mat-form-field>
-                    <input
-                        type="text"
-                        matInput
-                        formControlName="name"
-                        placeholder="Guest Name"
-                    >
-                </mat-form-field>
-                <mat-form-field>
-                    <input
-                        type="email"
-                        matInput
-                        formControlName="email"
-                        placeholder="Provide and Email"
-                    >
-                </mat-form-field>
-                <mat-form-field>
-                    <input
-                        type="number"
-                        matInput
-                        formControlName="age"
-                        placeholder="Guest Age"
-                    >
-                </mat-form-field>
-            </div>
+            <mat-accordion class="example-headers-align" multi>     
+                <mat-expansion-panel>
+        
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>Guest {{ i + 1 }} </mat-panel-title>
+                    </mat-expansion-panel-header>
+    
+                    <div [formGroupName]="i">
+                        <mat-form-field>
+                            <input
+                                type="text"
+                                matInput
+                                formControlName="name"
+                                placeholder="Guest Name"
+                            >
+                        </mat-form-field>
+
+                        <mat-form-field>
+                            <input
+                                type="email"
+                                matInput
+                                formControlName="email"
+                                placeholder="Provide and Email"
+                            >
+                        </mat-form-field>
+
+                        <mat-form-field>
+                            <input
+                                type="number"
+                                matInput
+                                formControlName="age"
+                                placeholder="Guest Age"
+                            >
+                        </mat-form-field>
+                    </div>
+
+                </mat-expansion-panel>
+            </mat-accordion>
         </div>
     </div>
-
+    <h1> Submit </h1>
     <button mat-raised-button color="primary" type="submit">Book Room</button>
 </form>
