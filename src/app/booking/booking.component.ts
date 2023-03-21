@@ -22,7 +22,7 @@ export class BookingComponent implements OnInit {
     })
 
     this.bookingForm = this.formBuilder.group({
-      termsAndConditions: new FormControl('false', { validators: Validators.requiredTrue }), //[false, [Validators.requiredTrue]],
+      termsAndConditions: new FormControl(false, { validators: Validators.requiredTrue }), //[false, [Validators.requiredTrue]],
       roomId: new FormControl({ value: '2', disabled: true}, { validators: [Validators.required]}), //[''],
       guestEmail: ['', [Validators.required, Validators.email]],
       checkinDate: [''],
@@ -40,11 +40,7 @@ export class BookingComponent implements OnInit {
         country: [''],
       }),
       guests: this.formBuilder.array([
-        this.formBuilder.group({
-          name: new FormControl(''),
-          email: [''],
-          age: ['']
-        })
+        this.getNewGuestGroup()
       ])
     })
   }
@@ -53,15 +49,18 @@ export class BookingComponent implements OnInit {
     return this.bookingForm.get('guests') as FormArray;
   }
 
+  private getNewGuestGroup(): FormGroup {
+    return this.formBuilder.group({
+      name: new FormControl('', [Validators.required, Validators.minLength(4)]),
+      email: [''],
+      age: ['']
+    })
+  }
+
   addGuest() {
     console.log("Adding a guest");
     //let guests = this.bookingForm.get('guests') as FormArray;
-    this.guests.push(
-      this.formBuilder.group({
-        name: new FormControl(''),
-        email: [''],
-        age: ['']
-    }))
+    this.guests.push(this.getNewGuestGroup());
   }
 
   removeGuest(id: number) {
@@ -74,7 +73,7 @@ export class BookingComponent implements OnInit {
       this.bookingForm.removeControl('passport');
       this.#hasPassport = false;
     } else {
-      this.bookingForm.addControl('passport', new FormControl(''));
+      this.bookingForm.addControl('passport', new FormControl('', [Validators.required]));
       this.#hasPassport = true;
     }
   }

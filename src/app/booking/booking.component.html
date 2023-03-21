@@ -45,11 +45,13 @@
                 formControlName="passport"
                 placeholder="Passport Number"
             >
+            <mat-error *ngIf="bookingForm.get('passport')?.invalid">{{ bookingForm.get('passport')?.errors | json }}</mat-error>    
         </mat-form-field>
     </div>
 
     <div>
         <mat-checkbox class="example-margin" formControlName="termsAndConditions">I accept the terms and conditions!</mat-checkbox>
+        <mat-error *ngIf="bookingForm.get('termsAndConditions')?.invalid">{{ bookingForm.get('termsAndConditions')?.errors | json }}</mat-error>
     </div>
 
     <mat-accordion class="example-headers-align" multi>
@@ -75,6 +77,7 @@
                 formControlName="guestEmail"
                 placeholder="my.email@email.com"
             >
+            <mat-error *ngIf="bookingForm.get('guestEmail')?.invalid">{{ bookingForm.get('guestEmail')?.errors | json }}</mat-error>
         </mat-form-field>
         <mat-form-field class="example-full-width">
             <mat-label>Check-in Date</mat-label>
@@ -211,6 +214,7 @@
                     </mat-expansion-panel-header>
     
                     <div [formGroupName]="i">
+                        <mat-error *ngIf="guests.at(i).get('name')?.invalid">{{ guests.at(i).get('name')?.errors | json }}</mat-error>
                         <mat-form-field>
                             <input
                                 type="text"
@@ -219,7 +223,7 @@
                                 placeholder="Guest Name"
                             >
                         </mat-form-field>
-
+                        
                         <mat-form-field>
                             <input
                                 type="email"
@@ -252,5 +256,5 @@
         </div>
     </div>
     <h1> Submit </h1>
-    <button mat-raised-button color="primary" type="submit">Book Room</button>
+    <button [disabled]="bookingForm.invalid" mat-raised-button color="primary" type="submit">Book Room</button>
 </form>
