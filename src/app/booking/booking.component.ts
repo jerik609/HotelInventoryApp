@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, MinLengthValidator, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-booking',
@@ -22,14 +22,15 @@ export class BookingComponent implements OnInit {
     })
 
     this.bookingForm = this.formBuilder.group({
-      roomId: new FormControl({ value: '2', disabled: true}), //[''],
-      guestEmail: [''],
+      termsAndConditions: new FormControl('false', { validators: Validators.requiredTrue }), //[false, [Validators.requiredTrue]],
+      roomId: new FormControl({ value: '2', disabled: true}, { validators: [Validators.required]}), //[''],
+      guestEmail: ['', [Validators.required, Validators.email]],
       checkinDate: [''],
       checkoutDate: [''],
       bookingStatus: [''],
       bookingAmount: [''],
       bookingDate: [''],
-      mobileNumber: [''],
+      mobileNumber: ['', [Validators.required, Validators.minLength(5)]],
       guestName: [''],
       address: this.formBuilder.group({
         addressLine: [''],

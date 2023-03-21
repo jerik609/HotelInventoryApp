@@ -25,6 +25,7 @@
 <p>Form: {{ bookingForm.value | json }}</p>
 <p>Pristine: {{ bookingForm.pristine | json }}</p>
 <p>Dirty: {{ bookingForm.dirty | json }}</p>
+<p>Is valid?: {{ bookingForm.valid | json }}</p>
 
 <hr>
 
@@ -47,6 +48,10 @@
         </mat-form-field>
     </div>
 
+    <div>
+        <mat-checkbox class="example-margin" formControlName="termsAndConditions">I accept the terms and conditions!</mat-checkbox>
+    </div>
+
     <mat-accordion class="example-headers-align" multi>
             
         <mat-expansion-panel>
@@ -54,7 +59,6 @@
         <mat-expansion-panel-header>
             <mat-panel-title>Room</mat-panel-title>
         </mat-expansion-panel-header>
-
 
         <mat-form-field class="example-full-width">
             <input 
