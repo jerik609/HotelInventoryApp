@@ -32,8 +32,8 @@
     <button mat-raised-button color="primary" type="button" (click)="togglePassport()">Toggle Passport</button>
 </div>
 
+<h1>Booking</h1>
 <form class="example-form" [formGroup]="bookingForm" (ngSubmit)="addBooking()">
-    <h1>Room</h1>
 
     <div *ngIf="bookingForm.get('passport')">
         <mat-form-field class="example-full-width">
@@ -47,77 +47,90 @@
         </mat-form-field>
     </div>
 
-    <mat-form-field class="example-full-width">
-        <input 
-            type="text" 
-            matInput 
-            formControlName="roomId"
-            placeholder="Room Id"
-        >
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-        <input 
-            type="email" 
-            matInput 
-            formControlName="guestEmail"
-            placeholder="my.email@email.com"
-        >
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-        <mat-label>Check-in Date</mat-label>
-        <input matInput [matDatepicker]="picker" formControlName="checkinDate">
-        <mat-hint>MM/DD/YYYY</mat-hint>
-        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-        <input 
-            type="datetime" 
-            matInput 
-            formControlName="checkoutDate"
-            placeholder="Check-out Date"
-        >
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-        <input 
-            type="text" 
-            matInput 
-            formControlName="bookingStatus"
-            placeholder="Booking status"
-        >
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-        <input 
-            type="number" 
-            matInput 
-            formControlName="bookingStatus"
-            placeholder="Booking status"
-        >
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-        <input 
-            type="number" 
-            matInput 
-            formControlName="bookingAmount"
-            placeholder="Booking amount"
-        >
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-        <input 
-            type="datetime" 
-            matInput 
-            formControlName="bookingDate"
-            placeholder="Booking date"
-        >
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-        <input 
-            type="tel" 
-            matInput 
-            formControlName="mobileNumber"
-            placeholder="Mobile number"
-        >
-    </mat-form-field>
+    <mat-accordion class="example-headers-align" multi>
+            
+        <mat-expansion-panel>
+        
+        <mat-expansion-panel-header>
+            <mat-panel-title>Room</mat-panel-title>
+        </mat-expansion-panel-header>
+
+
+        <mat-form-field class="example-full-width">
+            <input 
+                type="text" 
+                matInput 
+                formControlName="roomId"
+                placeholder="Room Id"
+            >
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <input 
+                type="email" 
+                matInput 
+                formControlName="guestEmail"
+                placeholder="my.email@email.com"
+            >
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <mat-label>Check-in Date</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="checkinDate">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <input 
+                type="datetime" 
+                matInput 
+                formControlName="checkoutDate"
+                placeholder="Check-out Date"
+            >
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <input 
+                type="text" 
+                matInput 
+                formControlName="bookingStatus"
+                placeholder="Booking status"
+            >
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <input 
+                type="number" 
+                matInput 
+                formControlName="bookingStatus"
+                placeholder="Booking status"
+            >
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <input 
+                type="number" 
+                matInput 
+                formControlName="bookingAmount"
+                placeholder="Booking amount"
+            >
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <input 
+                type="datetime" 
+                matInput 
+                formControlName="bookingDate"
+                placeholder="Booking date"
+            >
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <input 
+                type="tel" 
+                matInput 
+                formControlName="mobileNumber"
+                placeholder="Mobile number"
+            >
+            </mat-form-field>
+
+        </mat-expansion-panel>
+            
+    </mat-accordion>
 
     <div formGroupName="address">
         <mat-accordion class="example-headers-align" multi>
@@ -220,6 +233,14 @@
                                 placeholder="Guest Age"
                             >
                         </mat-form-field>
+                    </div>
+                    <div>
+                        <button
+                            mat-raised-button
+                            color="primary"
+                            type="button"
+                            (click)="removeGuest(i)"
+                        >Remove Guest</button>
                     </div>
 
                 </mat-expansion-panel>

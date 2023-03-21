@@ -63,6 +63,10 @@ export class BookingComponent implements OnInit {
     }))
   }
 
+  removeGuest(id: number) {
+    this.guests.removeAt(id);
+  }
+
   #hasPassport: boolean = false;
   togglePassport() {
     if (this.#hasPassport) {
