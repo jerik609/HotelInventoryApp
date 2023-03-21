@@ -22,7 +22,7 @@
 <br> -->
 
 <h3> debug info </h3>
-<p>Form: {{ bookingForm.value | json }}</p>
+<p>Form: {{ bookingForm.getRawValue() | json }}</p>
 <p>Pristine: {{ bookingForm.pristine | json }}</p>
 <p>Dirty: {{ bookingForm.dirty | json }}</p>
 <p>Is valid?: {{ bookingForm.valid | json }}</p>

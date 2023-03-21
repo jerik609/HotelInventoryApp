@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, MinLengthValidator, Validators } from '@angular/forms';
+import { mergeMap } from 'rxjs';
+import { BookingService } from './booking.service';
 
 @Component({
   selector: 'app-booking',
@@ -12,7 +14,7 @@ export class BookingComponent implements OnInit {
   
   bookingForm2!: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private bookingService: BookingService) {
   }
 
   ngOnInit(): void {
@@ -39,7 +41,7 @@ export class BookingComponent implements OnInit {
       mobileNumber: [
         '', 
         { 
-          updateOn:'blur'
+          updateOn:'change'
         }
       ],
       guestName: [''],
@@ -53,13 +55,22 @@ export class BookingComponent implements OnInit {
       guests: this.formBuilder.array([
         this.getNewGuestGroup()
       ])
-    }, { updateOn: 'blur' })
+    }, { updateOn: 'change' })
 
     this.getBookingData();
 
-    this.bookingForm.valueChanges.subscribe({
-      next: change => console.log("Registered form value change: ", change)
-    })
+    // this.bookingForm.valueChanges.subscribe({
+    //   // we should not subscribe within subscribe
+    //   next: change => this.bookingService.bookRoom(change).subscribe({
+    //     next: data => {}
+    //   })
+    // });
+      
+    this.bookingForm.valueChanges.pipe();
+      mergeMap((data) => this.bookingService.bookRoom(data));
+
+      //console.log("Registered form value change: ", change)
+    
 
   }
 
@@ -99,23 +110,31 @@ export class BookingComponent implements OnInit {
   addBooking() { 
     console.log("The submitted form", this.bookingForm.getRawValue());
     console.log(this.bookingForm.get('address')?.getRawValue().addressLine)
-    this.bookingForm.reset({
-      roomId: '2',
-      guestEmail: 'blah@blahblah.sk',
-      guests: [{
-        name: "moo"
-      }],
-      address: {
-        city: "testcity"
-      },
-      termsAndConditions: false
-    })
+    
+    // we shall read the raw value to also get hidden fields value
+    this.bookingService.bookRoom(this.bookingForm.getRawValue()).subscribe({
+        next: reply => console.log("Reply of booking post: ", reply),
+        error: error => console.log("Error while posting booking: ", error),
+        complete: () => console.log("completed booking post")
+      });
+    
+    // this.bookingForm.reset({
+    //   roomId: '2',
+    //   guestEmail: 'blah@blahblah.sk',
+    //   guests: [{
+    //     name: "moo"
+    //   }],
+    //   address: {
+    //     city: "testcity"
+    //   },
+    //   termsAndConditions: false
+    // })
   }
 
   // mocking function to test setValue and patchValue, "as if the data were comming from some backend"
   getBookingData() {
     this.bookingForm.patchValue({//setValue({
-      termsAndConditions: new FormControl(false, { validators: Validators.requiredTrue }), //[false, [Validators.requiredTrue]],
+      termsAndConditions: false,
       roomId: '2',
       guestEmail: 'test@gmail.com',
       checkinDate: new Date('10-Feb-2020'),
