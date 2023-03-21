@@ -184,19 +184,19 @@ export class RoomsComponent implements OnDestroy, OnInit, DoCheck, AfterViewInit
   @ViewChildren(HeaderComponent) headerChildrenComponent!: QueryList<HeaderComponent>;
 
   ngAfterViewInit(): void {
-    this.headerComponent!.title = "Rooms View";
+    //this.headerComponent!.title = "Rooms View";
 
     console.log(this.headerChildrenComponent);
 
     this.headerChildrenComponent?.forEach(element =>
       element.title = "modified title value using @ViewChildren");
 
-    this.headerChildrenComponent.last.title = "The very last title";
+    //this.headerChildrenComponent.last.title = "The very last title";
   }
 
   ngAfterViewChecked(): void {
     // triggered after one check ahs been performed - not used that much (only once)
-    this.headerComponent!.title = "one time trigger actions";
+    //this.headerComponent!.title = "one time trigger actions";
   }
 
   ngDoCheck(): void {
