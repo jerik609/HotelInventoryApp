@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, MinLengthValidator, Validators } from '@angular/forms';
-import { mergeMap } from 'rxjs';
+import { exhaustMap, mergeMap, switchMap } from 'rxjs';
 import { BookingService } from './booking.service';
 
 @Component({
@@ -65,13 +65,28 @@ export class BookingComponent implements OnInit {
     //     next: data => {}
     //   })
     // });
-      
-    this.bookingForm.valueChanges.pipe();
-      mergeMap((data) => this.bookingService.bookRoom(data));
+    
+    // this.bookingForm.valueChanges.subscribe({
+    //   next: change => console.log(change)
+    // })
+
+    // this.bookingForm.valueChanges.pipe(
+    //   mergeMap(data => this.bookingService.bookRoom(data))
+    // ).subscribe({
+    //   next: event => console.log("post event!"),
+    //   error: error => console.log("error:", error)
+    // })
+
+    this.bookingForm.valueChanges.pipe(
+      mergeMap(data => this.bookingService.bookRoom(data))
+    ).subscribe({
+      next: event => console.log("post event!"),
+      error: error => console.log("error:", error)
+    })
+
 
       //console.log("Registered form value change: ", change)
     
-
   }
 
   get guests() {
