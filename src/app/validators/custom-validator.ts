@@ -30,7 +30,6 @@ export class CustomValidator {
     static validateDates(bribe: string) {
         
         return (group: FormGroup) => {
-            console.log("VALIDATING DATES!!!!!!!");
             const checkinDate = group.get('checkinDate')?.value;
             const checkoutDate = group.get('checkoutDate')?.value;
             console.log("In:", checkinDate, "\nOut:", checkoutDate);
@@ -45,12 +44,17 @@ export class CustomValidator {
     }
 
     static validateDatesNoParam(group: FormGroup) {
-        console.log("VALIDATING DATES!!!!!!!");
         const checkinDate = group.get('checkinDate')?.value;
         const checkoutDate = group.get('checkoutDate')?.value;
         console.log("In:", checkinDate, "\nOut:", checkoutDate);
-            
+
         if (checkinDate === null || checkoutDate === null || checkinDate > checkoutDate) {
+            group.get('checkinDate')?.setErrors({
+                invalidCheckinDate: true
+            });
+            group.get('checkoutDate')?.setErrors({
+                invalidCheckoutDate: true
+            });
             return {
                 invalidCheckinCheckoutDatesWithNoParams: true
             };

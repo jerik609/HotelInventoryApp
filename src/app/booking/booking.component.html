@@ -81,7 +81,8 @@
                 placeholder="my.email@email.com"
             >
         </mat-form-field>
-        
+
+        <mat-error *ngIf="bookingForm.get('checkinDate')?.errors">The <strong>errors</strong>: {{ bookingForm.get('checkinDate')?.errors | json }}</mat-error>
         <mat-form-field class="example-full-width">
             <mat-label>Check-in Date</mat-label>
             <input matInput [matDatepicker]="picker" formControlName="checkinDate">
@@ -89,6 +90,7 @@
             <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
+        <mat-error *ngIf="bookingForm.get('checkoutDate')?.errors">The <strong>errors</strong>: {{ bookingForm.get('checkoutDate')?.errors | json }}</mat-error>
         <mat-form-field class="example-full-width">
             <mat-label>Check-in Date</mat-label>
             <input matInput [matDatepicker]="picker2" formControlName="checkoutDate">
