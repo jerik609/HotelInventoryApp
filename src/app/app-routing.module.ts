@@ -44,6 +44,7 @@ const routes: Routes = [
     loadChildren: () => import('./booking/booking.module').then(m => m.BookingModule),
     //canActivate: [canActivateGuard]
   },
+  { path: 'comments', loadChildren: () => import('./comments/comments.module').then(m => m.CommentsModule) },
   { path:'**', component: NotfoundComponent }
 ];
 
