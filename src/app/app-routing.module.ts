@@ -40,7 +40,7 @@ const routes: Routes = [
   },
   { path:'', redirectTo:'/login', pathMatch: 'full'}, // no guard here :-) would not make sense
   { 
-    path: 'booking', 
+    path: 'booking/:roomid',
     loadChildren: () => import('./booking/booking.module').then(m => m.BookingModule),
     //canActivate: [canActivateGuard]
   },

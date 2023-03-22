@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { GetElemPipe } from './GetElemPipe';
-
-
+import { GetElemPipe } from './getElemPipe';
 
 @NgModule({
   declarations: [GetElemPipe],

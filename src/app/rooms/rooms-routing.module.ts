@@ -2,7 +2,6 @@ import { inject, NgModule } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivateChildFn, RouterModule, RouterStateSnapshot, Routes } from '@angular/router';
 import { LoginService } from '../login/login.service';
 import { BannerComponent } from './banner/banner.component';
-import { BookingComponent } from './booking/booking.component';
 import { RoomsAddComponent } from './rooms-add/rooms-add.component';
 import { RoomsComponent } from './rooms.component';
 
@@ -31,7 +30,7 @@ const routes: Routes = [
         children: [ { path: 'banner', component: BannerComponent }]
       },
       // this matches anything, so it has to be below the more specific cases
-      { path:':roomid', component: BookingComponent }
+      //{ path:':roomid', component: BookingComponent }
     ]
   },
 ];

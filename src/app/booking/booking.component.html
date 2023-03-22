@@ -21,12 +21,12 @@
 <p>============ SEPARATOR =============</p>
 <br> -->
 
-<!-- <h3> debug info </h3>
+<!-- <h3> debug info </h3> -->
 <p>Form: {{ bookingForm.getRawValue() | json }}</p>
 <p>Pristine: {{ bookingForm.pristine | json }}</p>
 <p>Dirty: {{ bookingForm.dirty | json }}</p>
-<p>Is valid?: {{ bookingForm.valid | json }}</p> -->
-
+<p>Is valid?: {{ bookingForm.valid | json }}</p>
+<p>The selected room id: {{ id$ | async }}</p>
 <!-- <hr> -->
 
 <div>

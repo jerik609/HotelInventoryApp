@@ -4,7 +4,7 @@ export class CustomValidator {
 
     static validateName(control: AbstractControl) {
         const value = control.value as string;
-        console.log('validating guest email');
+        //console.log('validating guest email');
         if (value.includes('test')) {
             return {
                 invalidName: true
@@ -32,7 +32,7 @@ export class CustomValidator {
         return (group: FormGroup) => {
             const checkinDate = group.get('checkinDate')?.value;
             const checkoutDate = group.get('checkoutDate')?.value;
-            console.log("In:", checkinDate, "\nOut:", checkoutDate);
+            //console.log("In:", checkinDate, "\nOut:", checkoutDate);
             
             if (checkinDate === null || checkoutDate === null || checkinDate > checkoutDate) {
                 return {
@@ -46,7 +46,7 @@ export class CustomValidator {
     static validateDatesNoParam(group: FormGroup) {
         const checkinDate = group.get('checkinDate')?.value;
         const checkoutDate = group.get('checkoutDate')?.value;
-        console.log("In:", checkinDate, "\nOut:", checkoutDate);
+        //console.log("In:", checkinDate, "\nOut:", checkoutDate);
 
         if (checkinDate === null || checkoutDate === null || checkinDate > checkoutDate) {
             group.get('checkinDate')?.setErrors({

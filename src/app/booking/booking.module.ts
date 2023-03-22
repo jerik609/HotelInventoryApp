@@ -10,26 +10,28 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
-import {MatExpansionModule} from '@angular/material/expansion';
-import {MatIconModule} from '@angular/material/icon';
-import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatIconModule } from '@angular/material/icon';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { CustompipesModule } from "../custompipes/custompipes.module";
 
 @NgModule({
-  declarations: [
-    BookingComponent
-  ],
-  imports: [
-    CommonModule,
-    BookingRoutingModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatButtonModule,
-    MatExpansionModule,
-    MatIconModule,
-    MatCheckboxModule
-  ]
+    declarations: [
+        BookingComponent
+    ],
+    imports: [
+        CommonModule,
+        BookingRoutingModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatButtonModule,
+        MatExpansionModule,
+        MatIconModule,
+        MatCheckboxModule,
+        CustompipesModule
+    ]
 })
 export class BookingModule { }

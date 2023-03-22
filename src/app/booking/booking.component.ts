@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, MinLengthValidator, Validators } from '@angular/forms';
-import { exhaustMap, mergeMap, Observable, of, switchMap } from 'rxjs';
+import { ActivatedRoute, ParamMap } from '@angular/router';
+import { exhaustMap, map, mergeMap, Observable, of, switchMap } from 'rxjs';
 import { CustomValidator } from '../validators/custom-validator';
 import { BookingService } from './booking.service';
+import { GetElemPipe } from '../custompipes/getElemPipe';
 
 @Component({
   selector: 'app-booking',
@@ -15,10 +17,23 @@ export class BookingComponent implements OnInit {
   
   bookingForm2!: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private bookingService: BookingService) {
+  constructor(private formBuilder: FormBuilder, 
+    private bookingService: BookingService,
+    private route: ActivatedRoute) {
   }
 
+  id$: Observable<number> = this.route.paramMap.pipe(
+    switchMap(paramMap => {
+        return of(Number(paramMap.get('roomid')?? 0))
+      }
+    )
+  );
+
+  #roomid!: number;
+
   ngOnInit(): void {
+
+    this.#roomid = Number(this.route.snapshot.paramMap.get('roomid'));
 
     this.bookingForm2 = this.formBuilder.group({
       dadaEmail: [''],
@@ -26,7 +41,7 @@ export class BookingComponent implements OnInit {
 
     this.bookingForm = this.formBuilder.group({
       termsAndConditions: new FormControl(false, { validators: Validators.requiredTrue }), //[false, [Validators.requiredTrue]],
-      roomId: new FormControl({ value: '2', disabled: true}, { validators: [Validators.required]}), //[''],
+      roomId: new FormControl({ value: this.#roomid, disabled: true}, { validators: [Validators.required]}), //[''],
       guestEmail: [
         '', 
         { 
@@ -158,9 +173,10 @@ export class BookingComponent implements OnInit {
 
   // mocking function to test setValue and patchValue, "as if the data were comming from some backend"
   getBookingData() {
+    console.log("GETBOOKINGDATA");
     this.bookingForm.patchValue({//setValue({
       termsAndConditions: false,
-      roomId: '2',
+      roomId: this.#roomid,
       guestEmail: 'test@gmail.com',
       checkinDate: new Date('10-Feb-2020'),
       checkoutDate: new Date('10-Feb-2020'),
