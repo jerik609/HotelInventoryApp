@@ -5,6 +5,7 @@ import { Room, Rooms } from './rooms';
 import { Observable, Subscription } from 'rxjs';
 import { HttpEventType, HttpHeaderResponse } from '@angular/common/http';
 import { ConfigService } from '../common-services/config.service';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-rooms',
@@ -13,6 +14,9 @@ import { ConfigService } from '../common-services/config.service';
   changeDetection: ChangeDetectionStrategy.Default
 })
 export class RoomsComponent implements OnDestroy, OnInit, DoCheck, AfterViewInit, AfterViewChecked {
+
+
+  priceFilter = new FormControl(1000);
 
   boo!: Boo;
 

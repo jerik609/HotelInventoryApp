@@ -5,27 +5,30 @@ import { RoomsRoutingModule } from './rooms-routing.module';
 import { RoomsComponent } from './rooms.component';
 import { RoomsListComponent } from './rooms-list/rooms-list.component';
 import { RoomsAddComponent } from './rooms-add/rooms-add.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderModule } from '../header/header.module';
 import { CustompipesModule } from '../custompipes/custompipes.module';
 import { BannerComponent } from './banner/banner.component';
 import { RouteConfigToken } from '../common-services/routeConfig.service';
 import { RouteConfig } from '../common-services/routeConfig';
 import { ConfigService } from '../common-services/config.service';
+import { FilterPipe } from './filter.pipe';
 
 @NgModule({
   declarations: [
     RoomsComponent,
     RoomsListComponent,
     RoomsAddComponent,
-    BannerComponent
+    BannerComponent,
+    FilterPipe
   ],
   imports: [
     CommonModule,
     RoomsRoutingModule,
     FormsModule,
     HeaderModule,
-    CustompipesModule
+    CustompipesModule,
+    ReactiveFormsModule
   ],
   providers: [
     {

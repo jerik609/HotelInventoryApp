@@ -5,7 +5,7 @@ import { Room } from '../rooms';
   selector: 'app-rooms-list',
   templateUrl: './rooms-list.component.html',
   styleUrls: ['./rooms-list.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush // this is the default change detection strategy (all changes are detected)
+  //changeDetection: ChangeDetectionStrategy.OnPush // this is the default change detection strategy (all changes are detected)
 })
 export class RoomsListComponent implements OnChanges, OnDestroy {
 
@@ -14,6 +14,8 @@ export class RoomsListComponent implements OnChanges, OnDestroy {
   ngOnDestroy(): void {
     console.log("DESTROYED!!!");
   }
+
+  @Input() filterPrice: number = 0;
 
   @Input() title: string = 'initial title';
 

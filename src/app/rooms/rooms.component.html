@@ -59,10 +59,15 @@
 <!-- <h3>Errors: {{ getErrors$ | async }}</h3>
 <h3>Room count: {{ getRoomCount$ | async }} </h3> -->
 
+{{ priceFilter.value | json }}
+<div>
+    <input type="number" class="form-control" placeholder="Price" [formControl]="priceFilter">
+</div>
+
 <!-- example of [ngStyle] and *ngIf -->
-<div [ngStyle]="{ 'font-weight': 'bold', 'color' : (rooms?.availableRooms ?? 0) > 5 ? 'green' : 'red' }"
+<div [ngStyle]="{ 'font-weight': 'bold', 'color' : (rooms?.availableRooms?? 0) > 5 ? 'green' : 'red' }"
     *ngIf="!hideRoomList && (getRooms$ | async) as theRoomz">
-    <app-rooms-list [rooms]="theRoomz" [title]="title" (clickedRoom)="selectRoom($event)"></app-rooms-list>
+    <app-rooms-list [rooms]="theRoomz" [title]="title" [filterPrice]="priceFilter.value?? 0" (clickedRoom)="selectRoom($event)"></app-rooms-list>
 </div>
 
 <router-outlet></router-outlet>
