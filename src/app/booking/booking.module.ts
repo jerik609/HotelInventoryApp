@@ -13,11 +13,14 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDialogModule } from '@angular/material/dialog';
 import { CustompipesModule } from "../custompipes/custompipes.module";
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 
 @NgModule({
     declarations: [
-        BookingComponent
+        BookingComponent,
+        ConfirmDialogComponent
     ],
     imports: [
         CommonModule,
@@ -31,6 +34,7 @@ import { CustompipesModule } from "../custompipes/custompipes.module";
         MatExpansionModule,
         MatIconModule,
         MatCheckboxModule,
+        MatDialogModule,
         CustompipesModule
     ]
 })

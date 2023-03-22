@@ -5,6 +5,9 @@ import { exhaustMap, map, mergeMap, Observable, of, switchMap } from 'rxjs';
 import { CustomValidator } from '../validators/custom-validator';
 import { BookingService } from './booking.service';
 import { GetElemPipe } from '../custompipes/getElemPipe';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import { DialogRef } from '@angular/cdk/dialog';
 
 @Component({
   selector: 'app-booking',
@@ -19,7 +22,8 @@ export class BookingComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder, 
     private bookingService: BookingService,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute,
+    public dialog: MatDialog) {
   }
 
   id$: Observable<number> = this.route.paramMap.pipe(
@@ -198,6 +202,14 @@ export class BookingComponent implements OnInit {
         age: 10
       }]
     })
+  }
+
+  openDialog(enterAnimationDuration: string, exitAnimationDuration: string): MatDialogRef<ConfirmDialogComponent, string> {
+    return this.dialog.open(ConfirmDialogComponent, {
+      width: '250px',
+      enterAnimationDuration,
+      exitAnimationDuration,
+    });
   }
 
 }
