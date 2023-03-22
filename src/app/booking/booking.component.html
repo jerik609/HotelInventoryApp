@@ -50,12 +50,13 @@
     </div>
 
     <div>
-        <mat-checkbox class="example-margin" formControlName="termsAndConditions">I accept the terms and conditions!</mat-checkbox>
         <mat-error *ngIf="bookingForm.get('termsAndConditions')?.invalid">{{ bookingForm.get('termsAndConditions')?.errors | json }}</mat-error>
+        <mat-checkbox class="example-margin" formControlName="termsAndConditions">I accept the terms and conditions!</mat-checkbox>
     </div>
 
+    <mat-error *ngIf="bookingForm.errors">{{ bookingForm.errors | json }}</mat-error>
     <mat-accordion class="example-headers-align" multi>
-            
+        
         <mat-expansion-panel>
         
         <mat-expansion-panel-header>
@@ -70,15 +71,17 @@
                 placeholder="Room Id"
             >
         </mat-form-field>
-        <mat-form-field class="example-full-width">
+        
+        <mat-error *ngIf="bookingForm.get('guestEmail')?.errors">The <strong>errors</strong>: {{ bookingForm.get('guestEmail')?.errors | json }}</mat-error>
+        <mat-form-field class="example-full-width">            
             <input 
                 type="email" 
                 matInput 
                 formControlName="guestEmail"
                 placeholder="my.email@email.com"
             >
-            <mat-error *ngIf="bookingForm.get('guestEmail')?.invalid">{{ bookingForm.get('guestEmail')?.errors | json }}</mat-error>
         </mat-form-field>
+        
         <mat-form-field class="example-full-width">
             <mat-label>Check-in Date</mat-label>
             <input matInput [matDatepicker]="picker" formControlName="checkinDate">
@@ -87,12 +90,11 @@
             <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
         <mat-form-field class="example-full-width">
-            <input 
-                type="datetime" 
-                matInput 
-                formControlName="checkoutDate"
-                placeholder="Check-out Date"
-            >
+            <mat-label>Check-in Date</mat-label>
+            <input matInput [matDatepicker]="picker2" formControlName="checkoutDate">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
         </mat-form-field>
         <mat-form-field class="example-full-width">
             <input 

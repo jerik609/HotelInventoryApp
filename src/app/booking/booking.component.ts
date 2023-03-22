@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, MinLengthValidator, Validators } from '@angular/forms';
-import { exhaustMap, mergeMap, switchMap } from 'rxjs';
+import { exhaustMap, mergeMap, Observable, of, switchMap } from 'rxjs';
+import { CustomValidator } from '../validators/custom-validator';
 import { BookingService } from './booking.service';
 
 @Component({
@@ -29,8 +30,13 @@ export class BookingComponent implements OnInit {
       guestEmail: [
         '', 
         { 
-          updateOn:'blur', 
-          validators: [Validators.required, Validators.minLength(5)]
+          updateOn:'change', 
+          validators: [
+            Validators.required, 
+            Validators.minLength(5), 
+            CustomValidator.validateName,
+            CustomValidator.validateSpecialChar('*')
+          ]
         }
       ],
       checkinDate: [''],
@@ -55,7 +61,11 @@ export class BookingComponent implements OnInit {
       guests: this.formBuilder.array([
         this.getNewGuestGroup()
       ])
-    }, { updateOn: 'change' })
+    }, 
+    { 
+      updateOn: 'change', 
+      validators: [CustomValidator.validateDates('cookies'), CustomValidator.validateDatesNoParam] 
+    })
 
     this.getBookingData();
 
@@ -78,7 +88,7 @@ export class BookingComponent implements OnInit {
     // })
 
     this.bookingForm.valueChanges.pipe(
-      mergeMap(data => this.bookingService.bookRoom(data))
+      mergeMap(data => of(data)) // this.bookingService.bookRoom(data))
     ).subscribe({
       next: event => console.log("post event!"),
       error: error => console.log("error:", error)
@@ -157,7 +167,7 @@ export class BookingComponent implements OnInit {
       bookingStatus: [''],
       bookingAmount: [''],
       bookingDate: [''],
-      mobileNumber: ['', [Validators.required, Validators.minLength(5)]],
+      mobileNumber: [''],
       guestName: [''],
       address: {
         addressLine: "hello",
