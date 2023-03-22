@@ -1,5 +1,5 @@
 import { APP_CONFIG, APP_SERVICE_CONFIG } from './app-config/appconfig.service';
-import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { APP_INITIALIZER, ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -25,6 +25,7 @@ import { HeaderModule } from './header/header.module';
 import { CustompipesModule } from './custompipes/custompipes.module';
 import { FormsModule } from '@angular/forms';
 import { RouteConfigToken } from './common-services/routeConfig.service';
+import { GlobalErrorHandler } from './errorhandler.service';
 
 // https://angular.io/guide/ngmodules
 // I can have any number of modules in my application, but there always has to be only one root module
@@ -87,6 +88,10 @@ function initFactory(initService: InitService){
     {
       provide: RouteConfigToken,
       useValue: { title: 'moo' },
+    },
+    {
+      provide: ErrorHandler, 
+      useClass: GlobalErrorHandler
     }
   ],
   bootstrap: [AppComponent] // this defines, which component will be loaded first (the root component)
