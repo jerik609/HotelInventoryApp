@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map, Observable, pluck } from 'rxjs';
 import { CommentService } from './comment.service';
 import { Comment } from './comment';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-comments',
@@ -10,12 +11,12 @@ import { Comment } from './comment';
 })
 export class CommentsComponent implements OnInit {
   
-  constructor(private commentService: CommentService) { }
+  constructor(private commentService: CommentService,
+    private route: ActivatedRoute) { }
 
-  comments$: Observable<Comment[]> = this.commentService.getComments$;
+  //comments$: Observable<Comment[]> = this.commentService.getComments$;
+  comments$: Observable<Comment[]> = this.route.data.pipe(map(data => data['comments']))
 
-  ngOnInit(): void {
-    
-  }
+  ngOnInit(): void { }
 
 }
